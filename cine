@@ -1,0 +1,41 @@
+import java.util.Scanner;
+public class MiProyectoCinePlanet {
+    public static void main ( String [] arg){
+        Scanner scanner = new Scanner(System.in);
+        int opcion2 = 0;
+        int [][] butacas = new int[11][14];
+        butacas[0][0] = 10;
+        butacas[1][0] = 1;
+//
+        System.out.println("Bienvenidos a Cine Planet");
+        System.out.println("opcion 1 : comprar boletos ");
+        System.out.println("opcion 2 : registrarse");
+        System.out.println("Elija una opcion ");
+        opcion2 = scanner.nextInt();
+
+
+        switch (opcion2){
+            case 1:
+                System.out.println("elejiste la opcion 1 ");
+
+                System.out.println("butacas de juliaca   ");
+                for (int i = 0; i  < butacas.length; i ++){ //contando la filas
+                    for (int c = 0; c  < butacas.length; c ++) {  //contando las columnas
+
+                        System.out.print(butacas[i][c] + " ");
+                    }
+                    System.out.println();
+
+
+
+
+
+                }
+
+
+        }
+    }
+
+
+
+}
