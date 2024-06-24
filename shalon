@@ -1,0 +1,185 @@
+import java.util.Scanner;
+public class nShalomEl {
+    public Scanner leer = new Scanner(System.in);
+    double total_pagar;
+
+    public String login() {
+        String usuario, correo, correo_in, contraseña, contraseña_in;
+        int edad;
+        Scanner adan = new Scanner(System.in);
+        System.out.println("Bienvenido a la empresa Shalom");
+        System.out.println("-----CREAR CUENTA-----");
+        System.out.println("Ingrese su usuario");
+        usuario = adan.nextLine();
+        System.out.println("Ingrese su correo");
+        correo = adan.nextLine();
+        System.out.println("Ingrese su contraseña");
+        contraseña = adan.nextLine();
+        System.out.println("Ingrese su edad");
+        edad = adan.nextInt();
+        if (edad >= 18){
+            System.out.println("-----INICIAR SESION-----");
+            System.out.println("Ingrese su correo");
+            correo_in = adan.nextLine();
+            System.out.println("Ingrese su contraseña");
+            contraseña_in = adan.nextLine();
+            if (correo_in.equals(correo) && contraseña_in.equals(contraseña)) {
+                System.out.println("Bienvenido :" + usuario);
+
+                System.out.println("Mujer/Varon");
+                String genero = "";
+                genero = adan.nextLine();
+                this.todo();
+            }
+        }
+        else{
+            System.out.println("edad no valida");
+        }
+        return null;
+    }
+
+    public double Cpaquete() {
+        String ancho, largo, alto, peso;
+        int i;
+        double precioporPaquete = 3.5;
+        int cantpaquete;
+        System.out.println("--Por favor, indique la cantidad de paquetes que desea enviar--");
+        cantpaquete = leer.nextInt();
+        leer.nextLine();
+
+        for (i = 1; i <= cantpaquete; i++) {
+            System.out.println("Por favor, describa las características del paquete NRO # " + i);
+            System.out.println("Ingrese el ancho");
+            ancho = leer.nextLine();
+            System.out.println("Ingrese el largo");
+            largo = leer.nextLine();
+            System.out.println("Ingrese el alto");
+            alto = leer.nextLine();
+            System.out.println("Ingrese el peso");
+            peso = leer.nextLine();
+            System.out.println("DATOS REGISTRADOS DE LA PERSONA" + i);
+            System.out.println("ANCHO: " + ancho);
+            System.out.println("LARGO: " + largo);
+            System.out.println("ALTO: " + alto);
+            System.out.println("PESO: " + peso);
+        }
+        total_pagar = precioporPaquete * cantpaquete;
+        System.out.println("El total a pagar es: " + total_pagar);
+        return total_pagar;
+    }
+
+    public String form_pago() {
+        System.out.println("desea pagarlo en efectivo o mediante tarjeta");
+        String viapago = leer.nextLine();
+        switch (viapago) {
+            case "en efectivo":
+                double vuelto, efectivo;
+                System.out.println("por favor, ingrese el dinero");
+                efectivo = leer.nextDouble();
+                vuelto = efectivo - total_pagar;
+                System.out.println("Su vuelto es: " + vuelto);
+
+                System.out.println("Gracias por su preferencia");
+                break;
+            case "tarjeta":
+                System.out.println("por favor, ingrese el numero de tarjeta");
+                leer.nextDouble();
+                System.out.println("ingrese el dinero");
+                leer.nextDouble();
+                System.out.println("ingrese ingrese el CCI");
+                leer.nextDouble();
+                System.out.println("desea boleta o factura");
+                leer.nextLine();
+                System.out.println("Se cobró: " + total_pagar + " de su cuenta. Gracias por su preferencia");
+                break;
+            default:
+                System.out.println("opción no valida");
+        }
+
+        return null;
+    }
+
+    public double Ccarta() {
+        double precioporCarta = 8;
+        int cantcarta;
+        System.out.println("--Por favor, indique la cantidad de cartas que desea enviar--");
+        cantcarta = leer.nextInt();
+        leer.nextLine();
+
+        total_pagar = precioporCarta * cantcarta;
+        System.out.println("El total a pagar es: " + total_pagar);
+        return total_pagar;
+    }
+
+    public String paquete_carta_y_C() {
+        System.out.println("seleccione si su envio será una carta o paquete");
+        String tip = leer.nextLine();
+        switch (tip) {
+            case "paquete":
+                this.Cpaquete();
+                break;
+            case "carta":
+                this.Ccarta();
+                break;
+            default:
+                System.out.println("opción no valida");
+        }
+
+        return null;
+    }
+
+    public String todo() {
+        System.out.println("Bienvenido a Shalom");
+        System.out.println("Seleccione su terminal de origen");
+        String[] terminales = {"Juliaca", "Arequipa", "Lima", "Ancash", "Apurimac", "Cajamarca", "Junin", "Ica", "Tumbes", "Ayacucho"};
+        for (String terminal : terminales) {
+            System.out.println(terminal);
+        }
+
+        String terminal_embarque = leer.nextLine();
+
+        if (terminal_embarque.equals("Juliaca") || terminal_embarque.equals("Arequipa") || terminal_embarque.equals("Lima")) {
+            System.out.println("Seleccione su terminal de llegada");
+
+            String[] destinos;
+            if (terminal_embarque.equals("Juliaca")) {
+                destinos = new String[]{"Lima", "Arequipa"};
+            } else if (terminal_embarque.equals("Arequipa")) {
+                destinos = new String[]{"Lima", "Juliaca"};
+            } else {
+                destinos = new String[]{"Arequipa", "Juliaca"};
+            }
+
+            for (String destino : destinos) {
+                System.out.println(destino);
+            }
+
+            String destino = leer.nextLine();
+
+            boolean destinoValido = false;
+            for (String d : destinos) {
+                if (destino.equals(d)) {
+                    destinoValido = true;
+                    break;
+                }
+            }
+
+            if (destinoValido) {
+                this.paquete_carta_y_C();
+                this.form_pago();
+            } else {
+                System.out.println("Ese destino no existe");
+            }
+        } else {
+            System.out.println("Ese destino no existe");
+        }
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+        nShalomEl traer = new nShalomEl();
+        traer.login();
+    }
+}
+
