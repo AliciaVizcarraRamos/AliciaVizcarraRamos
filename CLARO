@@ -1,0 +1,451 @@
+/*- JHOSUE fgeneral-fequipos
+- EDY RICHARD fpostpago
+- JHAN CARLO fclarohogar
+- MIGUEL CHOQUE FpaquetesPrepago*/
+
+import java.util.Scanner;
+public class Claro {
+    private static Scanner sc = new Scanner(System.in);
+    String[] mainMenu = {"EQUIPOS", "POSTPAGO MAX", "CLARO HOGAR", "PREPAGO CHÉVERE"};
+    String[] equiposMenu = {"CAMBIATE A CLARO", "RENUEVA TU EQUIPO", "ACCESORIOS,"};
+    String[] marcas = {"APPLE", "SAMSUNG", "HONOR"};
+    String[] appleprod = {"iPhone 14\n128GB\n==S/ 2799.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 69.90\n", "iPhone 15 Pro\n==S/ 4739.00 0nline==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 69.90\n", "iPhone 13\n128GB\n==S/ 2459.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 69.90\n"};
+    double[] applepre = {2799.00, 4739.00, 2459.00};
+    String[] samsungprod = {"Galaxy S23 FE\n256GB\n==S/ 2249.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 95.90\n", "Galaxy A15\n256GB\nDesde\n==S/ 609.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 69.90\n", "Galaxy A25 5G\n256GB\nDesde\n==S/ 799.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 69.90\n"};
+    double[] samsungpre = {2249.00, 609.00, 799.00};
+    String[] honorprod = {"Magic 6 Lita 5G\n256GB\nDesde\n==S/ 1299.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 95.90\n", "90 Lite 5G\n256GB\nDesde\n==S/ 769.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 69.90\n", "X8B\n256GB\nDesde\n==S/ 829.00 Online==\nPOSTPAGO PORTABILIDAD\nMax ilimitado 69.90\n"};
+    double[] honorpre = {1299.00, 769.00, 829.00};
+    String[] accesorios = {"SONY Consola Playstation 5 Slim 1TB C/2juegos", "I2GO Audif BT Vin i2go Bass Go NG", "BLACKSHEEP Parlante BT DOME"};
+    double[] accesoriospre = {2689.00, 39.00, 829.00};
+    String[] postpagoMenu = {"MAX ILIMITADO", "MAX", "MAX PLAY + NETFLIX"};
+    String[] maxilipro = {"1---> S/ 69.90", "2---> S/ 79.90", "3---> S/ 95.90"};
+    double[] maxilipre = {69.90, 79.90, 95.90};
+    String[] maxpro = {"1---> Max S/. 29.90", "2---> Max S/. 39.90", "3---> Max S/. 49.90"};
+    double[] maxpre = {29.90, 39.90, 49.90};
+    String[] maxplaypro = {"1---> Max Play S/. 95.90", "2---> Max Play S/. 115.90", "3---> Max Play S/. 145.90"};
+    double[] maxplaypre = {95.90, 115.90, 145.90};
+    String[] clarohMenu = {"INTERNET FIJO", "INTERNET TV", "INTERNET+TELEFONÍA", "INTERNET+TV+TELEFONIA"};
+    String[] interfijopro = {"1. Claro Hogar 1 Play Internet 300Mbps\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/75\n", "2. Claro Hogar 1 Play Internet 600Mbps\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/100\n", "3. Claro Hogar 1 Play Internet 150Mbps\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/65\n", "4. Claro Hogar 1 Play Internet 400Mbps\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/85\n", "5. Claro Hogar 1 Play Internet 1000Mbps\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/145\n", "6. Claro Hogar 1 Play Internet 1500Mbps\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/200\n"};
+    double[] interfijopre = {75.00, 100.00, 65.00, 85.00, 145.00, 200.00};
+    String[] internettvpro = {"1. Claro Hogar 2 Play Internet 300Mbps+TV avanzado\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/135\n", "2. Claro Hogar 2 Play Internet 600Mbps+TV avanzado\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/160\n", "3. Claro Hogar 2 Play Internet 150Mbps+TV avanzado\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/125\n", "4. Claro Hogar 2 Play Internet 400Mbps+TV avanzado\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/145\n", "5. Claro Hogar 2 Play Internet 1000Mbps+TV avanzado\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/205\n", "6. Claro Hogar 2 Play Internet 1500Mbps+TV avanzado\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/260\n"};
+    double[] internettvpre = {135.00, 160.00, 125.00, 145.00, 205.00, 260.00};
+    String[] internettelpro = {"1. Claro Hogar 2 Play Internet 300Mbps+telefonia 1000\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/76\n", "2. Claro Hogar 2 Play Internet 600Mbps+telefonia 1000\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/101\n", "3. Claro Hogar 2 Play Internet 150Mbps+telefonia 1000\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/66\n", "4. Claro Hogar 2 Play Internet 400Mbps+telefonia 1000\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/86\n", "5. Claro Hogar 2 Play Internet 1000Mbps+telefonia 1000\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/146\n", "6. Claro Hogar 2 Play Internet 1500Mbps+telefonia 1000\n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/201\n"};
+    double[] internettelpre = {76.00, 101.00, 66.00, 86.00, 146.00, 201.00};
+    String[] intertvtelpro = {"1. Claro Hogar 3 Play Internet 300Mbps+TV avanzado+telefonia \n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/141\n", "2. Claro Hogar 3 Play Internet 600Mbps+TV avanzado+telefonia \n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/161\n", "3. Claro Hogar 3 Play Internet 150Mbps+TV avanzado+telefonia \n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/131\n", "4. Claro Hogar 3 Play Internet 400Mbps+TV avanzado+telefonia \n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/146\n", "5. Claro Hogar 3 Play Internet 1000Mbps+TV avanzado+telefonia \n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/206\n", "6. Claro Hogar 3 Play Internet 1500Mbps+TV avanzado+telefonia \n'Suscripcion incluida Paramount'\nPLAN MENSUAL S/258\n"};
+    double[] intertvtelpre = {141.00, 161.00, 131.00, 146.00, 206.00, 258.00};
+    String[] paquetespreMenu = {"1. Telegram", "2. Tiktok", "3. Paquetes de SMS", "4. Paquetes de voz"};
+    String[] redespro = {"1. INTERNET + SMS 150 MB ilimitados", "2. INTERNET + RPC + SMS 300 MB ilimitados", "3. INTERNET + RPC + SMS 1 GB ilimitados", "4. INTERNET + RPC + SMS 2 GB ilimitados"};
+    double[] redespre = {3.00, 5.00, 10.00, 20.00};
+    String[] paquetespro = {"1. SMS y llamadas ilimitadas por 1 día", "2. SMS y llamadas ilimitadas por 3 días", "3. SMS y llamadas ilimitadas por 6 días", "4. SMS ilimitados"};
+    double[] paquetespre = {3.00, 5.00, 10.00, 1.00};
+
+    double totalPagar = 0;
+
+    //JHOSUE MEDINA
+    public String fgeneral() {
+        System.out.println("=============================\nTENEMOS LO QUE ESTAS BUSCANDO\n=============================");
+        for (int i = 0; i < mainMenu.length; i++) {
+            System.out.println((i + 1) + ". " + mainMenu[i]);
+        }
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        switch (opcion) {
+            case 1:
+                this.fequipos();
+            case 2:
+                this.fpostpago();
+            case 3:
+                this.fclarohogar();
+            case 4:
+                this.fpaquetesPrepago();
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                this.fgeneral();
+                break;
+        }
+        return "";
+    }
+
+    public String fequipos() {
+        System.out.println("Catálogo de Celulares Y Equipos | Tienda Claro Online");
+        for (int i = 0; i < equiposMenu.length; i++) {
+            System.out.println((i + 1) + ". " + equiposMenu[i]);
+        }
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        switch (opcion) {
+            case 1:
+            case 2:
+                this.fCambiate_renueva_a_claro();
+                break;
+            case 3:
+                this.fAccesorios();
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                this.fequipos();
+                break;
+        }
+        return "Seleccion completa";
+    }
+
+    public void fCambiate_renueva_a_claro() {
+        System.out.println("CATÁLOGO");
+        for (int i = 0; i < marcas.length; i++) {
+            System.out.println((i + 1) + ". " + marcas[i]);
+        }
+        int cat = sc.nextInt();
+        sc.nextLine();
+        switch (cat) {
+            case 1:
+                this.Apple();
+            case 2:
+                this.Samsung();
+            case 3:
+                this.Honor();
+            default:
+                System.out.println("Opcion no valida");
+                this.fCambiate_renueva_a_claro();
+                break;
+        }
+    }
+
+    public void Apple() {
+        for (int i = 0; i < appleprod.length; i++) {
+            System.out.println((i + 1) + ". " + appleprod[i]);
+        }
+        int apple = sc.nextInt();
+        sc.nextLine();
+        if (apple >= 1 && apple <= appleprod.length) {
+            double precio = applepre[apple - 1];
+            System.out.println("Seleccionaste: " + appleprod[apple - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        } else {
+            System.out.println("Opcion no valida");
+            this.Apple();
+        }
+    }
+
+    public void Samsung() {
+        for (int i = 0; i < samsungprod.length; i++) {
+            System.out.println((i + 1) + ". " + samsungprod[i]);
+        }
+        int sam = sc.nextInt();
+        sc.nextLine();
+        if (sam >= 1 && sam <= samsungprod.length) {
+            double precio = samsungpre[sam - 1];
+            System.out.println("Seleccionaste: " + samsungprod[sam - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        } else {
+            System.out.println("Opcion no valida");
+            this.Samsung();
+        }
+    }
+
+    public void Honor() {
+        for (int i = 0; i < honorprod.length; i++) {
+            System.out.println((i + 1) + ". " + honorprod[i]);
+        }
+        int honor = sc.nextInt();
+        sc.nextLine();
+        if (honor >= 1 && honor <= honorprod.length) {
+            double precio = honorpre[honor - 1];
+            System.out.println("Seleccionaste: " + honorprod[honor - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        } else {
+            System.out.println("Opcion no valida");
+            this.Honor();
+        }
+    }
+
+    public void fAccesorios() {
+        System.out.println("CATÁLOGO");
+        for (int i = 0; i < accesorios.length; i++) {
+            System.out.println((i + 1) + ". " + accesorios[i]);
+        }
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        if (opcion >= 1 && opcion <= accesorios.length) {
+            double precio = accesoriospre[opcion - 1];
+            System.out.println("Seleccionaste: " + accesorios[opcion - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        } else {
+            System.out.println("Opcion no valida");
+            this.fAccesorios();
+        }
+    }
+
+    //EDY RICHARD
+    public String fpostpago() {
+        System.out.println("Bienvenido a Claro compras Planes Postpago");
+        System.out.println("Planes Disponibles");
+        System.out.println("===ELIJA UNA OPCION===");
+        for (int i = 0; i < postpagoMenu.length; i++) {
+            System.out.println((i + 1) + ". " + postpagoMenu[i]);
+        }
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        switch (opcion) {
+            case 1:
+                this.fMaxIlimitado();
+                break;
+            case 2:
+                this.fMax();
+                break;
+            case 3:
+                this.fMaxPlayNetflix();
+                break;
+            default:
+                System.out.println("Opción no válida.");
+                this.fpostpago();
+                break;
+        }
+        return "Seleccion completa";
+    }
+
+    public void fMaxIlimitado() {
+        System.out.println("Max Ilimitado:");
+        for (int i = 0; i < maxilipro.length; i++) {
+            System.out.println((i + 1) + ". " + maxilipro[i]);
+        }
+        int maxI = sc.nextInt();
+        sc.nextLine();
+        if (maxI >= 1 && maxI <= maxilipro.length) {
+            double precio = maxilipre[maxI - 1];
+            System.out.println("Seleccionaste: " + maxilipro[maxI - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        } else {
+            System.out.println("Opción no válida.");
+            this.fMaxIlimitado();
+        }
+    }
+
+    public void fMax() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Plan Max");
+        for (int i = 0; i < maxpro.length; i++) {
+            System.out.println((i + 1) + ". " + maxpro[i]);
+        }
+        int max = sc.nextInt();
+        sc.nextLine();
+        if (max >= 1 && max <= maxpro.length) {
+            double precio = maxpre[max - 1];
+            System.out.println("Seleccionaste: " + maxpro[max - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        } else {
+            System.out.println("Opcion no valida");
+            this.fMax();
+        }
+    }
+
+    public void fMaxPlayNetflix() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Plan Max Play + Netflix");
+        for (int i = 0; i < maxplaypro.length; i++) {
+            System.out.println((i + 1) + ". " + maxplaypro[i]);
+        }
+        int maxplay = sc.nextInt();
+        sc.nextLine();
+        if (maxplay >= 1 && maxplay <= maxplaypro.length) {
+            double precio = maxplaypre[maxplay - 1];
+            System.out.println("Seleccionaste: " + maxplaypro[maxplay - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        }
+    }
+
+    //JHAN CARLO
+    public String fclarohogar() {
+        System.out.println("Arma el mejor plan para tu hogar.\nElige el plan de Internet, cable Claro TV y telefonía fija para tu casa.\n");
+        for (int i = 0; i < clarohMenu.length; i++) {
+            System.out.println((i + 1) + ". " + clarohMenu[i]);
+        }
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        switch (opcion) {
+            case 1:
+                this.internetfijo();
+                break;
+            case 2:
+                this.internettv();
+                break;
+            case 3:
+                this.internettelefonia();
+                break;
+            case 4:
+                this.internettvtelefonia();
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                this.fclarohogar();
+                break;
+        }
+        return "Seleccion completa";
+    }
+
+    public void internetfijo() {
+        System.out.println("==============\nINTERNET FIJO:\n==============\n");
+        for (int i = 0; i < interfijopro.length; i++) {
+            System.out.println((i + 1) + ". " + internettelpro[i]);
+        }
+        int intefijo = sc.nextInt();
+        sc.nextLine();
+        if (intefijo >= 1 && intefijo <= interfijopro.length) {
+            double precio = interfijopre[intefijo - 1];
+            System.out.println("Seleccionaste: " + interfijopro[intefijo - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        }
+    }
+
+    public void internettv() {
+        System.out.println("==============\nINTERNET TV\n==============\n");
+        for (int i = 0; i < internettvpro.length; i++) {
+            System.out.println((i + 1) + ". " + internettvpro[i]);
+        }
+        int intetv = sc.nextInt();
+        sc.nextLine();
+        if (intetv >= 1 && intetv <= internettvpro.length) {
+            double precio = internettvpre[intetv - 1];
+            System.out.println("Seleccionaste: " + internettvpro[intetv - 1]);
+            System.out.println("Ingrese otra vez la opcion eligida");
+            this.fsolicitarDatosCompra(precio);
+        }
+    }
+
+    public void internettelefonia() {
+        System.out.println("=====================\nINTERNET TELEFONÍA\n=====================");
+        for (int i = 0; i < internettelpro.length; i++) {
+            System.out.println((i + 1) + ". " + internettelpro[i]);
+        }
+        int intetele = sc.nextInt();
+        sc.nextLine();
+        if (intetele >= 1 && intetele <= internettelpro.length) {
+            double precio = internettelpre[intetele - 1];
+            System.out.println("Seleccionaste: " + internettelpro[intetele - 1]);
+            System.out.println("Ingrese otra vez la opcion eligida");
+            this.fsolicitarDatosCompra(precio);
+        }
+    }
+
+    public void internettvtelefonia() {
+        System.out.println("=====================\nINTERNET TV TELEFONÍA\n=====================");
+        for (int i = 0; i < intertvtelpro.length; i++) {
+            System.out.println((i + 1) + ". " + intertvtelpro[i]);
+        }
+        int intemega = sc.nextInt();
+        sc.nextLine();
+        if (intemega >= 1 && intemega <= intertvtelpro.length) {
+            double precio = intertvtelpre[intemega - 1];
+            System.out.println("Seleccionaste: " + intertvtelpro[intemega - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        }
+    }
+
+    //MIGUEL CHOQUE
+    public String fpaquetesPrepago() {
+        System.out.println("Sácale el jugo a tu saldo, comprando Paquetes Chévere para que estés más conectado");
+        for (int i = 0; i < paquetespreMenu.length; i++) {
+            System.out.println((i + 1) + ". " + paquetespreMenu[i]);
+        }
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        switch (opcion) {
+            case 1:
+            case 2:
+                this.fredes();
+                break;
+            case 3:
+            case 4:
+                this.fpaquetes();
+                break;
+            default:
+                System.out.println("Opción inválida");
+                this.fpaquetesPrepago();
+                break;
+        }
+        return "Seleccion completa";
+    }
+
+    public void fredes() {
+        System.out.println("Paquetes de Redes Sociales");
+        for (int i = 0; i < redespro.length; i++) {
+            System.out.println((i + 1) + ". " + redespro[i]);
+        }
+        int opcion1 = sc.nextInt();
+        sc.nextLine();
+        if (opcion1 >= 1 && opcion1 <= redespro.length) {
+            double precio = redespre[opcion1 - 1];
+            System.out.println("Seleccionaste: " + redespro[opcion1 - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        }
+    }
+
+    public void fpaquetes() {
+        System.out.println("Paquetes para Llamadas y SMS");
+        for (int i = 0; i < paquetespro.length; i++) {
+            System.out.println((i + 1) + ". " + paquetespro[i]);
+        }
+        int opcion2 = sc.nextInt();
+        sc.nextLine();
+        if (opcion2 >= 1 && opcion2 <= paquetespro.length) {
+            double precio = paquetespre[opcion2 - 1];
+            System.out.println("Seleccionaste: " + paquetespro[opcion2 - 1]);
+            System.out.println("Ingrese otra vez la opcion elegida");
+            this.fsolicitarDatosCompra(precio);
+        }
+    }
+
+    private static void fsolicitarDatosCompra(double totalPagar) {
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
+
+        System.out.println("Ingrese  sus datos para generar la boleta de compra:");
+        System.out.print("==NOMBRES==\n");
+        String nombres = sc.nextLine();
+        System.out.print("==APELLIDOS==\n");
+        String apellidos = sc.nextLine();
+        System.out.println("==CORREO==");
+        String correo = sc.nextLine();
+        System.out.print("==N° DNI==\n");
+        int dni = sc.nextInt();
+        System.out.print("==NÚMERO DE TARJETA DE CREDITO O DEBITO (8 dígitos)==\n");
+        int tarjeta = sc.nextInt();
+        fgenerarBoleta(nombres, apellidos, correo, dni, tarjeta, totalPagar);
+
+    }
+
+    private static void fgenerarBoleta(String nombres, String apellidos, String correo, int dni, int tarjeta, double totalPagar) {
+        double igv = totalPagar * 0.18;
+        double subtotal = totalPagar - igv;
+        System.out.println("\n=====        BOLETA DE COMPRA        =====");
+        System.out.println("Nombres:                " + nombres);
+        System.out.println("Apellidos:              " + apellidos);
+        System.out.println("Correo:                 " + correo);
+        System.out.println("N° DNI:                 " + dni);
+        System.out.println("Número de tarjeta:      " + tarjeta);
+        System.out.println("Subtotal:               S/" + subtotal);
+        System.out.println("IGV(18% :               S/" + igv);
+        System.out.println("Total a pagar:          S/" + totalPagar);
+        System.out.println("==========================================\n");
+        System.out.println("La boleta ha sido generada.");
+        System.exit(0);
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println("==CLARO==");
+
+        Claro men = new Claro();
+        men.fgeneral();
+    }
+}
