@@ -1,0 +1,122 @@
+import java.util.Scanner;
+
+public class TransportesRayo {
+    private int edad;
+    private String nombres, apellidos, dni;
+    private Scanner vizcarra = new Scanner(System.in);
+
+    public void fBienvenida() {System.out.println("BIENVENIDO A TRANSPORTES RAYO");
+    }
+    public void fIngresarDatos() {
+        System.out.println("Ingrese sus nombres");
+        nombres = vizcarra.nextLine();
+        System.out.println("Ingrese sus apellidos");
+        apellidos = vizcarra.nextLine();
+        System.out.println("Ingrese su nro DNI");
+        dni = vizcarra.nextLine();
+        System.out.println("Ingrese su edad");
+        edad = vizcarra.nextInt();
+        vizcarra.nextLine();
+    }
+    public void fSeleccionarTerminalEmbarque() {
+        if (edad < 65) {
+            String terminal_embarque = "";
+            System.out.println("Seleccione su terminal de embarque");
+            System.out.println("Puno/Arequipa/Lima");
+            terminal_embarque = vizcarra.nextLine();
+            fSeleccionarTerminalLlegada(terminal_embarque);
+            System.out.println("---------------------------------------");
+        }
+    }
+
+    public void fSeleccionarTerminalLlegada(String terminal_embarque) {
+        String terminal_final = "";
+        System.out.println("Seleccione su terminal de llegada");
+        switch (terminal_embarque) {
+            case "Puno":
+                System.out.println("Lima/Arequipa");
+                break;
+            case "Arequipa":
+                System.out.println("Lima/Puno");
+                break;
+            case "Lima":
+                System.out.println("Arequipa/Puno");
+                break;
+            default:
+                System.out.println("Por momento no tenemos ruta a ese destino");
+                return;
+        }
+        terminal_final = vizcarra.nextLine();
+        fCalcularPago(terminal_embarque, terminal_final);
+    }
+
+    public void fCalcularPago(String terminal_embarque, String terminal_final) {
+        switch (terminal_embarque) {
+            case "Puno":
+                fCalcularPagoPuno(terminal_final);
+                break;
+            case "Arequipa":
+                fCalcularPagoArequipa(terminal_final);
+                break;
+            case "Lima":
+                fCalcularPagoLima(terminal_final);
+                break;
+        }
+    }
+
+    public void fCalcularPagoPuno(String terminal_final) {
+        switch (terminal_final) {
+            case "Lima":
+                fCalcularPagoFinal(200.00);
+                break;
+            case "Arequipa":
+                fCalcularPagoFinal(40.00);
+                break;
+            default:
+                System.out.println("Por el momento no contamos con ruta a ese destino");
+        }
+    }
+
+    public void fCalcularPagoArequipa(String terminal_final) {
+        switch (terminal_final) {
+            case "Lima":
+                fCalcularPagoFinal(150.00);
+                break;
+            case "Puno":
+                fCalcularPagoFinal(40.00);
+                break;
+            default:
+                System.out.println("Por el momento no contamos con ruta a ese destino");
+        }
+    }
+
+    public void fCalcularPagoLima(String terminal_final) {
+        switch (terminal_final) {
+            case "Arequipa":
+                fCalcularPagoFinal(150.00);
+                break;
+            case "Puno":
+                fCalcularPagoFinal(200.00);
+                break;
+            default:
+                System.out.println("Por el momento no contamos con ruta a ese destino");
+        }
+    }
+
+    public void fCalcularPagoFinal(double precio) {
+        int cant_pasajelima;
+        double total_pagarlima;
+        System.out.println("¿Cuantos pasajes comprará?");
+        cant_pasajelima = vizcarra.nextInt();
+        total_pagarlima = precio * cant_pasajelima;
+        System.out.println("El total a pagar es:" + total_pagarlima);
+        System.out.println("Gracias por su compra " + nombres + " " + apellidos);
+    }
+
+    public static void main(String[] args) {
+        TransportesRayo vizcarra = new TransportesRayo();
+        vizcarra.fBienvenida();
+        vizcarra.fIngresarDatos();
+        vizcarra.fSeleccionarTerminalEmbarque();
+    }
+}
