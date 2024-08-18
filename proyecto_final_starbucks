@@ -1,0 +1,835 @@
+import java.util.Scanner;
+
+public class STARBUCKS {
+    private Scanner vizcarra = new Scanner(System.in);
+    private int cant_bebida, cant_comida, cant_cafe,cant_packs, opcion, tamaño, COMIDA, MERCH, total_pagar;
+    private String metodo_pago, datos, NOMBRE, DNI, clave, fecha;
+    private double precio;
+
+    public String fCUENTA() {
+        String correo = "", correo_in, contraseña, contraseña_in, nombre;
+        Boolean InicioSesion = false;
+        while (!InicioSesion) {
+            System.out.println("--BIENVENIDOS A STARBUCKS--");
+            System.out.println("REGISTRAR CUENTA");
+            System.out.println("Ingrese su correo");
+            correo = vizcarra.nextLine();
+            System.out.println("Ingrese su nombre");
+            nombre = vizcarra.nextLine();
+            System.out.println("Ingrese su contraseña");
+            contraseña = vizcarra.nextLine();
+            System.out.println("INICIAR SESION");
+            System.out.println("Ingrese su correo");
+            correo_in = vizcarra.nextLine();
+            System.out.println("Ingrese su contraseña");
+            contraseña_in = vizcarra.nextLine();
+            if (correo.equals(correo_in) && contraseña.equals(contraseña_in)) {
+                System.out.println("Bienvenido :" + nombre);
+                System.out.println("Inicio de sesión exitoso");
+                this.fmenu();
+                this.ffechaactual();
+                this.fFRAPPUCCINOS();
+                this.fgenerarBoleta();
+
+                InicioSesion = true;
+            } else {
+                System.out.println("Datos incorrectos, intente nuevamente");
+            }
+        }
+        return correo;
+    }
+    public void ffechaactual() {
+        System.out.println("ingrese la fecha");
+        fecha = vizcarra.nextLine();
+
+    }
+
+    public void fmenu() {
+        System.out.println("Selecione lo que desea comprar ");
+        System.out.println("Marque\n 1 si es BEBIDAS \n 2 si es ALIMENTOS   \n 3 si es MERCH Y CAFE EN GRANO\n 4 si es PACKS Y BOXES");
+        opcion = vizcarra.nextInt();
+        switch (opcion) {
+            case 1:
+                System.out.println("Marque\n 1 si es FRAPPUCCINOS\n 2 si es ESPRESSOCALIENTE \n 3 si es ESPRESSO FRIO");
+                opcion = vizcarra.nextInt();
+                switch (opcion) {
+                    case 1:
+                        this.fFRAPPUCCINOS();
+                        this.fpagosFRAPPUCCINOS();
+                        this.fgenerarBoleta();
+                        break;
+                    case 2:
+                        this.fESPRESSOCALIENTE();
+                        this.fpagosESPRESSOCALIENTE();
+                        break;
+                    case 3:
+                        this.fESPRESSOFRIO();
+                        this.fpagosESPRESSOFRIO();
+                        this.fgenerarBoleta();
+                        break;
+                }
+            case 2:
+                System.out.println("Marque\n 1 si es PASTRIES \n 2 si es POSTRES \n 3 si es SANDWICHES");
+                opcion = vizcarra.nextInt();
+                switch (opcion) {
+                    case 1:
+                        this.fPASTRIES();
+                        this.fpagosPASTRIES();
+                        this.fgenerarBoletaALIMENTOS();
+                        break;
+                    case 2:
+                        this.fPOSTRES();
+                        this.fpagosPOSTRES();
+                        this.fgenerarBoletaALIMENTOS();
+                        break;
+                    case 4:
+                        this.fSANDWICHES();
+                        this.fpagosSANDWICHES();
+                        this.fgenerarBoletaALIMENTOS();
+                        break;
+                    default:
+                        System.out.println("opcion no valida");
+                        break;
+
+                }
+            case 3:
+                System.out.println("Marque\n 1 si es MERCH\n 2 si es CAFEENGRANOS ");
+                opcion = vizcarra.nextInt();
+                switch (opcion) {
+                    case 1:
+                        this.fMERCH();
+                        this.fpagosMERCH();
+                        this.fgenerarBoletaMERCHYCAFÉENGRANO();
+                        break;
+                    case 2:
+                        this.fCAFEENGRANOS();
+                        this.fpagosCAFEENGRANOS();
+                        this.fgenerarBoletaMERCHYCAFÉENGRANO();
+
+
+                        break;
+                    default:
+                        System.out.println("Opcion no valida");
+                        break;
+                }
+            case 4:
+                System.out.println("Marque\n 1 si esCoffee for Share\n 2 si es DESAYUNOS\n 3 si es ANTOJOS DE LA TARDE \n");
+                opcion = vizcarra.nextInt();
+                switch (opcion) {
+                    case 1:
+                        this.fCoffeeforShare();
+                        this.fpagosCoffeeforShare();
+                        this.fgenerarBoletaPACKSYBOXES();
+                        break;
+                    case 2:
+                        this.fDesayunos();
+                        this.fpagosDesayunos();
+                        this.fgenerarBoletaPACKSYBOXES();
+
+                        break;
+                    case 3:
+                        this.fAntojosdelatarde();
+                        this.fpagosAntojosdelatarde();
+                        this.fgenerarBoletaPACKSYBOXES();
+
+                        break;
+                }
+            default:
+                System.out.println("Opcion no valida");
+                break;
+
+
+        }
+    }
+
+    public void fFRAPPUCCINOS() {
+        System.out.println("los tipos de bebida que desea comprar son:");
+        System.out.println("1)=Retro Frappuccinos ");
+        System.out.println("2)=Caramel Ribbon Crunch");
+        System.out.println("3)=Cookies & Creme Frappuccin");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de bebida que desea");
+        int opcionFRAPPUCCINOS = vizcarra.nextInt();
+        System.out.println("selecione el tamaño de su bebida ");
+        System.out.println("1) Alto ");
+        System.out.println("2) Grande ");
+        System.out.println("3) Venti ");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tamaño de su bebida");
+        tamaño = vizcarra.nextInt();
+        switch (opcionFRAPPUCCINOS) {
+            case 1:
+                precio = 16.50;
+                break;
+            case 2:
+                precio = 18.50;
+                break;
+            case 3:
+                precio = 19.50;
+                break;
+            default:
+                break;
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosFRAPPUCCINOS();
+    }
+
+    public void fpagosFRAPPUCCINOS() {
+        double total;
+        cant_bebida = vizcarra.nextInt();
+        switch (tamaño) {
+        }
+
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equals("tarjeta")) {
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoleta();
+        } else if (metodo_pago.equals("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoleta();
+        }
+    }
+
+
+    public void fgenerarBoleta() {
+        System.out.println("*******************************************************************+");
+        System.out.println("LASINO S.A -RUC N° 20388829452");
+        System.out.println("Real Plaza, Juliaca 21104");
+        System.out.println("___________ BOLETA DE VENTA___________");
+        System.out.println("fecha de emision: " + fecha);
+        System.out.println("TIPODOC:DNI");
+        System.out.println("Nombre: " + NOMBRE);
+        System.out.println("______________________________________________________________________--");
+        System.out.println("LA CANTIDAD DE BEBIDA QUE ELIGIO DE SU AGRADO ES  : " + cant_bebida);
+        System.out.println("TIPO DE BEBIDA: " + opcion);
+        System.out.println("Tamaño de bebida: " + tamaño);
+        System.out.println("Método de pago: " + metodo_pago);
+        double total = cant_bebida * precio;
+        System.out.println("el total a pagar es de " + total);
+        System.out.println("GRACIAS POR SU COMPRA" + NOMBRE);
+        System.out.println("***********************************************************************");
+
+    }
+
+    public void fESPRESSOCALIENTE() {
+        System.out.println(".......................................");
+        System.out.println("los tipos de bebida que desea comprar son:");
+        System.out.println("1).Mocha Macchiato Con bebida de avena ");
+        System.out.println("2).Black & White Mocha");
+        System.out.println("3).Algarrobina Latte");
+        System.out.println("-----------------------------------------------");
+        System.out.println("elija el tipo de bebida");
+        int opcionESPRESSOCALIENTE = vizcarra.nextInt();
+        System.out.println("selecione el tamaño de su bebida ");
+        System.out.println("1) Alto");
+        System.out.println("2) Grande");
+        System.out.println("3) Venti ");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tamaño de su bebida");
+        tamaño = vizcarra.nextInt();
+        switch (opcionESPRESSOCALIENTE) {
+            case 1:
+                precio = 17.50;
+                break;
+            case 2:
+                precio = 15.50;
+                break;
+            case 3:
+                precio = 19.00;
+                break;
+
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosESPRESSOCALIENTE();
+    }
+
+    public void fpagosESPRESSOCALIENTE() {
+        double total;
+        cant_bebida = vizcarra.nextInt();
+        switch (tamaño) {
+
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("-----------------------------------------------");
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoleta();
+
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoleta();
+        }
+    }
+
+    public void fESPRESSOFRIO() {
+        System.out.println("los tipos de bebida que desea comprar son:");
+        System.out.println("1).Latte Frio con bebida de avena --------> S/.16.00");
+        System.out.println("2).Cocoa Macchiato Frio con bebeida de avena--------> S/.16.00");
+        System.out.println("3).Black Cool Breaw--------> S/.10.00");
+        System.out.println("----------------------------------------------------------");
+        System.out.println("elija el tipo de bebida");
+        int opcionESPRESSOFRIO = vizcarra.nextInt();
+        System.out.println("selecione el tamaño de su bebida ");
+        System.out.println("1) Alto ");
+        System.out.println("2) Grande");
+        System.out.println("3) Venti ");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tamaño de su bebida");
+        tamaño = vizcarra.nextInt();
+        switch (opcionESPRESSOFRIO) {
+            case 1:
+                precio = 14.50;
+                break;
+            case 2:
+                precio = 18.50;
+                break;
+            case 3:
+                precio = 16.40;
+
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosESPRESSOFRIO();
+    }
+
+    public void fpagosESPRESSOFRIO() {
+        double total;
+        cant_bebida = vizcarra.nextInt();
+        switch (tamaño) {
+
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoleta();
+
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.fgenerarBoleta();
+        }
+    }
+
+    public void fPASTRIES() {
+        System.out.println("los tipos de COMIDA que desea comprar son:");
+        System.out.println("1).Protein  Box ");
+        System.out.println("2).Banana Bread");
+        System.out.println("3).Macarones X2");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de pastries que desea");
+        int opcionPASTRIES = vizcarra.nextInt();
+        switch (opcionPASTRIES) {
+            case 1:
+                precio = 19.00;
+                break;
+            case 2:
+                precio = 8.0;
+                break;
+            case 3:
+                precio = 8.00;
+                break;
+
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosPASTRIES();
+    }
+
+    public void fpagosPASTRIES() {
+        double total;
+        cant_comida = vizcarra.nextInt();
+        switch (COMIDA) {
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaALIMENTOS();
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaALIMENTOS();
+        }
+    }
+
+    public void fgenerarBoletaALIMENTOS() {
+        System.out.println("***********************************************************+");
+        System.out.println("LASINO S.A -RUC N° 20388829452");
+        System.out.println("Real Plaza, Juliaca 21104");
+        System.out.println("_________ BOLETA DE VENTA ___________-");
+        System.out.println("fecha de emision : " + fecha);
+        System.out.println("TIPODOC: DNI:");
+        System.out.println("Nombre: " + NOMBRE);
+        System.out.println("______________________________________________________________________--");
+        System.out.println("LA CANTIDAD DE COMIDA QUE ELIGIO DE SU AGRADO ES  : " + cant_comida);
+        System.out.println("TIPO DE COMIDA: " + opcion);
+        System.out.println("Método de pago: " + metodo_pago);
+        double total = cant_comida * precio;
+        System.out.println("el total a pagar es de " + total);
+        System.out.println("GRACIAS POR SU COMPRA" + NOMBRE);
+        System.out.println("**********************************");
+
+    }
+
+    public void fPOSTRES() {
+        System.out.println("los tipos de COMIDA que desea comprar son:");
+        System.out.println("1).Crocante de manzana vegetal ");
+        System.out.println("2).Cake Pop Vainilla ");
+        System.out.println("3).Cheesecake de Chocolate");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de postre desea que desea");
+        int opcionPOSTRES = vizcarra.nextInt();
+        switch (opcionPOSTRES) {
+            case 1:
+                precio = 15.00;
+                break;
+            case 2:
+                precio = 6.50;
+                break;
+            case 3:
+                precio = 15.00;
+                break;
+
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosPOSTRES();
+    }
+
+    public void fpagosPOSTRES() {
+        double total;
+        cant_comida = vizcarra.nextInt();
+        switch (COMIDA) {
+
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("-----------------------------------------------");
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaALIMENTOS();
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaALIMENTOS();
+        }
+    }
+
+    public void fSANDWICHES() {
+        System.out.println("los tipos de COMIDA que desea comprar son:");
+        System.out.println("1).Wrap Napolitano ");
+        System.out.println("2).Sandwiches Italiano ");
+        System.out.println("3).Croisssant de mantequilla");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de Sandwiches   que desea");
+        int opcionSANDWICHES = vizcarra.nextInt();
+        switch (opcionSANDWICHES) {
+            case 1:
+                precio = 15.00;
+                break;
+            case 2:
+                precio = 14.50;
+                break;
+            case 3:
+                precio = 5.00;
+                break;
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosSANDWICHES();
+    }
+
+    public void fpagosSANDWICHES() {
+        double total;
+        cant_comida = vizcarra.nextInt();
+        switch (COMIDA) {
+
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("-----------------------------------------------");
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaALIMENTOS();
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaALIMENTOS();
+        }
+    }
+
+    public void fMERCH() {
+        System.out.println("los tipos de MERCH  que desea comprar son:");
+        System.out.println("1).Prensa Francesa ");
+        System.out.println("2).Prensa Cold Brew");
+        System.out.println("3).Prensa Pour Over ");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de MERCH que desea");
+        int opcionMERCH = vizcarra.nextInt();
+        switch (opcionMERCH) {
+            case 1:
+                precio = 160.00;
+                break;
+            case 2:
+                precio = 160.00;
+                break;
+            case 3:
+                precio = 80.00;
+                break;
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosMERCH();
+    }
+
+    public void fpagosMERCH() {
+        double total;
+        cant_cafe = vizcarra.nextInt();
+        switch (MERCH) {
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("-----------------------------------------------");
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaMERCHYCAFÉENGRANO();
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaMERCHYCAFÉENGRANO();
+        }
+    }
+
+    public void fCAFEENGRANOS () {
+        System.out.println("los tipos de CAFE que desea comprar son:");
+        System.out.println("1).Peru");
+        System.out.println("2).Espresso Roast ");
+        System.out.println("3).Verona ");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de CAFE que desea");
+        int opcionCAFEENGRANOS = vizcarra.nextInt();
+        switch (opcionCAFEENGRANOS) {
+            case 1:
+                precio = 37.00;
+                break;
+            case 2:
+                precio = 37.00;
+                break;
+            case 3:
+                precio = 37.00;
+                break;
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosCAFEENGRANOS();
+    }
+
+    public void fpagosCAFEENGRANOS () {
+        double total;
+        cant_cafe = vizcarra.nextInt();
+        switch (MERCH) {
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaMERCHYCAFÉENGRANO();
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaMERCHYCAFÉENGRANO();
+        }
+    }
+
+    public void fgenerarBoletaMERCHYCAFÉENGRANO() {
+
+        System.out.println("***********************************************************+");
+        System.out.println("LASINO S.A -RUC N° 20388829452");
+        System.out.println("Real Plaza, Juliaca 21104");
+        System.out.println("_________ BOLETA DE VENTA ___________-");
+        System.out.println("fecha de emision : " + fecha);
+        System.out.println("TIPODOC: DNI:");
+        System.out.println("Nombre: " + NOMBRE);
+        System.out.println("______________________________________________________________________--");
+        System.out.println("LA CANTIDAD DE CAFE QUE ELIGIO DE SU AGRADO ES  : " + cant_cafe);
+        System.out.println("TIPO DE CAFE: " + opcion);
+        System.out.println("Método de pago: " + metodo_pago);
+        double total = cant_cafe * precio;
+        System.out.println("el total a pagar es de " + total);
+        System.out.println("GRACIAS POR SU COMPRA" + NOMBRE);
+        System.out.println("**********************************");
+
+    }
+    public void fCoffeeforShare() {
+        System.out.println("los tipos de coffe  que desea comprar son:");
+        System.out.println("1).Coffee Traveler ");
+        System.out.println("2).Pack Coffee Mixto");
+        System.out.println("3).Pack Coffee Sandwich ");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de Coffee que desea");
+        int opcioncoffe = vizcarra.nextInt();
+        switch (opcioncoffe) {
+            case 1:
+                precio = 60.00;
+                break;
+            case 2:
+                precio = 120.00;
+                break;
+            case 3:
+                precio = 135.00;
+                break;
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosCoffeeforShare();
+    }
+    public void fpagosCoffeeforShare() {
+        double total;
+        cant_packs = vizcarra.nextInt();
+        switch (COMIDA) {
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaPACKSYBOXES();
+
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaPACKSYBOXES();
+        }
+    }
+    public void fDesayunos() {
+        System.out.println("los tipos de desayuno que desea comprar son:");
+        System.out.println("1).Duo Desayuno ");
+        System.out.println("2).Desayuno ParaDos");
+        System.out.println("-----------------------------------------------");
+        System.out.println("Elija el tipo de desayuno que desea");
+        int opcionDESAYUNOS =vizcarra.nextInt();
+        switch (opcionDESAYUNOS) {
+            case 1:
+                precio = 11.00;
+                break;
+            case 2:
+                precio = 30.00;
+                break;
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosDesayunos();
+    }
+
+    public void fpagosDesayunos() {
+        double total;
+        cant_packs = vizcarra.nextInt();
+        switch (COMIDA) {
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaPACKSYBOXES();
+
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaPACKSYBOXES();
+        }
+    }
+    public void fAntojosdelatarde() {
+        System.out.println("los tipos de merch que desea comprar son:");
+        System.out.println("1).Muffins 4 share ");
+        System.out.println("2).Momentos Dulces");
+        System.out.println("3).Sweet &  share");
+        System.out.println("Elija el tipo de merch que desea");
+        int opcionANTOJOS =vizcarra.nextInt();
+        switch (opcionANTOJOS) {
+            case 1:
+                precio = 32.00;
+                break;
+            case 2:
+                precio = 14.00;
+                break;
+            case 3:
+                precio=20.00;
+                break;
+        }
+        System.out.println("ingrese cuantos desea comprar");
+        fpagosAntojosdelatarde();
+    }
+
+    public void fpagosAntojosdelatarde() {
+        double total;
+        cant_packs = vizcarra.nextInt();
+        switch (COMIDA) {
+        }
+        System.out.println("-----------------------------------------");
+        System.out.println("¿Va a pagar con tarjeta o efectivo?");
+        metodo_pago = vizcarra.next();
+        if (metodo_pago.equalsIgnoreCase("tarjeta")) {
+            System.out.println("--------------------------------------");
+            System.out.println("Ingrese los datos de su tarjeta");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            System.out.println("ingrese su DNI");
+            DNI = vizcarra.nextLine();
+            System.out.println("ingrese su clave");
+            clave = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaPACKSYBOXES();
+
+        } else if (metodo_pago.equalsIgnoreCase("efectivo")) {
+            System.out.println("--------------------------------------");
+            datos = vizcarra.nextLine();
+            System.out.println("ingrese su nombre");
+            NOMBRE = vizcarra.nextLine();
+            this.ffechaactual();
+            this.fgenerarBoletaPACKSYBOXES();
+        }
+    }
+    public void fgenerarBoletaPACKSYBOXES() {
+
+        System.out.println("***********************************************************+");
+        System.out.println("LASINO S.A -RUC N° 20388829452");
+        System.out.println("Real Plaza, Juliaca 21104");
+
+        System.out.println("_________ BOLETA DE VENTA ___________-");
+        System.out.println("fecha de emision : " + fecha);
+        System.out.println("TIPODOC : DNI");
+        System.out.println("Nombre: " + NOMBRE);
+        System.out.println("______________________________________________________________________--");
+        System.out.println("LA CANTIDAD DE CAFE QUE ELIGIO DE SU AGRADO ES  : " + cant_packs);
+        System.out.println("TIPO DE CAFE: " + opcion);
+        System.out.println("Método de pago: " + metodo_pago);
+        double total = cant_packs * precio;
+        System.out.println("el total a pagar es de " + total);
+        System.out.println("GRACIAS POR SU COMPRA   :" + NOMBRE);
+        System.out.println("************************************************************************");
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println("--------------------------------------------------------");
+        STARBUCKS vizcarra = new STARBUCKS();
+        vizcarra.fCUENTA();
+        vizcarra.ffechaactual();
+    }
+}
