@@ -1,0 +1,108 @@
+import java.util.Scanner;
+public class CHATBOT_CLARO {
+    public static void main(String[] args) {
+        Scanner vizcarra = new Scanner(System.in);
+        String opcion;
+        double recarga = 0;
+        boolean salir=false;
+
+        do {
+            System.out.println("--BIENVENIDO AL OPERADOR CLARO---");
+            System.out.println("--ocpciones--");
+            System.out.println("1. Recarga");
+            System.out.println("2. Paquetes de internet");
+            System.out.println("3. Consultar saldo");
+            System.out.println("4. ingrese las consultas que quiera hacer");
+            System.out.println("5. Cambiar de plan");
+            System.out.println("6. Salir");
+            System.out.print("Ingrese la opción deseada: ");
+            opcion = vizcarra.nextLine();
+
+            switch (opcion) {
+                case "1":
+                    System.out.print("Ingrese la cantidad a recargar: $");
+                    double comprar = vizcarra.nextDouble();
+                    vizcarra.nextLine();
+                    recarga += comprar;
+                    System.out.println("Su saldo actual es $" + recarga);
+                    System.out.println("Su recarga actual es: $" + recarga);
+                    break;
+                case "2":
+                    System.out.println("Seleccione un paquete de internet:");
+                    System.out.println("1. Doble de MB - S/.5.00");
+                    System.out.println("2. Doble de MB - S/.10.00");
+                    System.out.print("Ingrese el número del paquete: ");
+                    int paquete = vizcarra.nextInt();
+                    vizcarra.nextLine();
+                    switch (paquete) {
+                        case 1:
+                            if(recarga>=5.00){
+
+                            }
+                            System.out.println("Ha elegido el paquete 1. Doble de MB - S/.5.00");
+                            recarga -= 5.00;
+                            System.out.println("el total en cobrarte es:recarga -= 5.00"+paquete);
+                            System.out.println("Su nuevo saldo es:$"+recarga);
+                            break;
+                        case 2:
+                            if(recarga>=10.00){
+
+                            }
+                            System.out.println("Ha elegido el paquete 2. Triple de MB - S/.10.00");
+                            recarga -= 10.00;
+                            System.out.println("el total en cobrarte es:recarga -= 10.00"+paquete);
+                            System.out.println("Su nuevo saldo es:$"+recarga);
+                            break;
+                        default:
+                            System.out.println("Paquete no válido. Por favor, elija 1 o 2.");
+                            break;
+                    }
+                    break;
+                case "3":
+                    System.out.println("Su saldo actual es $" + recarga);
+                    System.out.println("Su recarga actual es: $" + recarga);
+                    break;
+                case"4":
+                    System.out.print("Ingrese la consulta que quiera hacer");
+                    System.out.println("1. Ingrese en el siguiente enlace aquí :https://cl4ro.pe/MiClaroWeb  ");
+                    System.out.println("2. Escriba  a este numero # 915020030");
+                    break;
+                case "5":
+                    System.out.println("Cambiando de plan...");
+                    System.out.println("seleccione su plan");
+                    System.out.println("1.prepago chevere");
+                    System.out.println("2.prepago chevere usar saldo");
+                    System.out.println("ingrese el numero de plan:");
+                    int plan = vizcarra.nextInt();
+                    vizcarra.nextLine();
+                    switch (plan){
+                        case 1:
+                            System.out.println("ha eligido el plan \"1.prepago chevere\"");
+                            recarga-=20.00;
+                            break;
+                        case 2:
+                            System.out.println("ha eligido el plan\"2.prepago chevere usar saldo\"");
+                            recarga-=5.00;
+                            System.out.println("tiene que recargarse ");
+                            break;
+                        default:
+                            System.out.println("plan no valido.´POR FAVOR ELIJA 1 O 2.");
+                            break;
+                    }
+                    break;
+                case "6":
+                    System.out.println("Gracias por utilizar nuestro servicio. ¡Hasta luego!");
+                    break;
+                default:
+                    System.out.
+                            println("Opción no válida. Por favor, seleccione una opción del menú.");
+
+                    if(!salir) {
+                        System.out.println("recarga:"+recarga);
+                    }
+            }
+        } while (!opcion.equals("5"));
+
+        vizcarra.close();
+    }
+}
