@@ -1,0 +1,217 @@
+
+import java.util.Scanner;
+public class ruta18 {
+    public static void main(String[] args) {
+        Scanner wali = new Scanner(System.in);
+        System.out.println("╔═══════════════════════════════════════════╗");
+        System.out.println("   Bienvenido a su Ruta 18, tome asiento");
+        System.out.println("╚═══════════════════════════════════════════╝");
+        int pasaje = 0;
+        int pasajeros = 1;
+        do {
+            System.out.println("Ingresé su pasaje en soles por favor");
+            System.out.println("_____________");
+            pasaje = wali.nextInt();
+            if (pasaje == 0) {
+                System.out.println("Ingresé su pasaje por favor\n//No vas a viajar gratis :D");
+                System.out.println("____________________");
+                pasaje = wali.nextInt();
+            } else if (pasaje >= 1) {
+                System.out.println("¿De cuantas personas me voy a cobrar el pasaje?");
+                System.out.println("________________");
+                pasajeros = wali.nextInt();
+                if (pasaje >= 1) {
+                    int vuelto_1;
+                    int vuelto = pasaje - pasajeros;
+                    System.out.println("Tu vuelto es " + vuelto + " soles");
+                    if (vuelto >= 0) {
+                        System.out.println("Ingresé la cantidad de km que quiere viajar");
+                        System.out.println("--------------------------------------------");
+
+                        double km = wali.nextDouble();
+                        int i;
+
+                        for (i = 1; i <= km; i++) {
+
+                            if (km <= 10) {
+
+                                System.out.println("  __");
+                                System.out.println(" /|||\\`.__");
+                                System.out.println("(   _    _ _\\");
+                                System.out.println("=`-()--()-'");
+                                System.out.println("     o  o");
+                                System.out.println("avanzandooo agarrate que te caes");
+
+                            } else if (km <= 15) {
+                                System.out.println("  __");
+                                System.out.println(" /|||\\`.__");
+                                System.out.println("(   _    _ _\\");
+                                System.out.println("=`-()--()-'");
+                                System.out.println("     o  o");
+                                System.out.println("avanzandooo agarrate que te caes");
+
+                            } else if (km <= 25) {
+                                System.out.println("  __");
+                                System.out.println(" /|||\\`.__");
+                                System.out.println("(   _    _ _\\");
+                                System.out.println("=`-()--()-'");
+                                System.out.println("     o  o");
+                                System.out.println("avanzandooo agarrate que te caes");
+
+                            } else if (km <= 35) {
+                                System.out.println("  __");
+                                System.out.println(" /|||\\`.__");
+                                System.out.println("(   _    _ _\\");
+                                System.out.println("=`-()--()-'");
+                                System.out.println("     o  o");
+                                System.out.println("avanzandooo agarrate que te caes");
+
+                            } else if (km <= 40) {
+                                System.out.println("  __");
+                                System.out.println(" /|||\\`.__");
+                                System.out.println("(   _    _ _\\");
+                                System.out.println("=`-()--()-'");
+                                System.out.println("     o  o");
+                                System.out.println("avanzandooo agarrate que te caes");
+
+                            }
+
+                        }
+                        if (km <= 10) {
+                            System.out.println("╔══════════════════════════════╗");
+                            System.out.println("Llegamos a plaza bolognesi");
+                            System.out.println("╚══════════════════════════════╝");
+                        } else if (km <= 15) {
+                            System.out.println("╔══════════════════════════════╗");
+                            System.out.println("Llegaste a plaza de armas");
+                            System.out.println("╚══════════════════════════════╝");
+                        } else if (km <= 25) {
+                            System.out.println("╔══════════════════════════════╗");
+                            System.out.println("Llegaste a parque cholo");
+                            System.out.println("╚══════════════════════════════╝");
+                        } else if (km <= 35) {
+                            System.out.println("╔══════════════════════════════╗");
+                            System.out.println("Llegaste al desvio");
+                            System.out.println("╚══════════════════════════════╝");
+                        } else if (km <= 40) {
+                            System.out.println("╔══════════════════════════════╗");
+                            System.out.println("Llegaste a la UPEU");
+                            System.out.println("╚══════════════════════════════╝");
+                        }
+                        System.out.println("¿Quiere retornar? SI/NO");
+                        System.out.println("═════════════════════════");
+                        String si = wali.nextLine();
+                        si = wali.nextLine();
+                        if (si.equals("si") || si.equals("SI")) {
+                            System.out.println("Ingresé su pasaje en soles por favor");
+                            System.out.println("_____________");
+                            pasaje = wali.nextInt();
+                            if (pasaje == 0) {
+                                System.out.println("Ingresé su pasaje por favor\n//No vas a viajar gratis :D");
+                                System.out.println("___________________");
+                                pasaje = wali.nextInt();
+                            } else if (pasaje >= 1) {
+                                System.out.println("¿De cuantas personas me voy a cobrar el pasaje?");
+                                System.out.println("_________________");
+                                pasajeros = wali.nextInt();
+                                if (pasaje >= 1) {
+                                    int vuelto_2;
+                                    int nue_vueltos = pasaje - pasajeros;
+                                    System.out.println("Tu vuelto es " + nue_vueltos +" soles");
+                                    if (nue_vueltos >= 0) {
+                                        System.out.println("Ingresé la cantidad que quiere retornar");
+                                        System.out.println("--------------------------------------------");
+                                        double kmm = wali.nextDouble();
+                                        double k = km - kmm;
+                                        for (i = 0; i <= kmm; i++) {
+
+                                            if (k <= 10) {
+
+                                                System.out.println("  __");
+                                                System.out.println(" /|||\\`.__");
+                                                System.out.println("(   _    _ _\\");
+                                                System.out.println("=`-()--()-'");
+                                                System.out.println("     o  o");
+                                                System.out.println("avanzandooo agarrate que te caes");
+
+                                            } else if (k <= 15) {
+                                                System.out.println("  __");
+                                                System.out.println(" /|||\\`.__");
+                                                System.out.println("(   _    _ _\\");
+                                                System.out.println("=`-()--()-'");
+                                                System.out.println("     o  o");
+                                                System.out.println("avanzandooo agarrate que te caes");
+
+                                            } else if (k <= 25) {
+                                                System.out.println("  __");
+                                                System.out.println(" /|||\\`.__");
+                                                System.out.println("(   _    _ _\\");
+                                                System.out.println("=`-()--()-'");
+                                                System.out.println("     o  o");
+                                                System.out.println("avanzandooo agarrate que te caes");
+
+                                            } else if (k <= 35) {
+                                                System.out.println("  __");
+                                                System.out.println(" /|||\\`.__");
+                                                System.out.println("(   _    _ _\\");
+                                                System.out.println("=`-()--()-'");
+                                                System.out.println("     o  o");
+                                                System.out.println("avanzandooo agarrate que te caes");
+
+                                            } else if (k <= 40) {
+                                                System.out.println("  __");
+                                                System.out.println(" /|||\\`.__");
+                                                System.out.println("(   _    _ _\\");
+                                                System.out.println("=`-()--()-'");
+                                                System.out.println("     o  o");
+                                                System.out.println("avanzandooo agarrate que te caes");
+
+                                            }
+
+                                        }
+                                        if (k <= 10) {
+                                            System.out.println("╔══════════════════════════════╗");
+                                            System.out.println("Llegamos a plaza bolognesi");
+                                            System.out.println("╚══════════════════════════════╝");
+                                        } else if (k <= 15) {
+                                            System.out.println("╔══════════════════════════════╗");
+                                            System.out.println("Llegaste a plaza de armas");
+                                            System.out.println("╚══════════════════════════════╝");
+                                        } else if (k <= 25) {
+                                            System.out.println("╔══════════════════════════════╗");
+                                            System.out.println("Llegaste a parque cholo");
+                                            System.out.println("╚══════════════════════════════╝");
+                                        } else if (k <= 35) {
+                                            System.out.println("╔══════════════════════════════╗");
+                                            System.out.println("Llegaste al desvio");
+                                            System.out.println("╚══════════════════════════════╝");
+                                        } else if (k <= 40) {
+                                            System.out.println("╔══════════════════════════════╗");
+                                            System.out.println("Llegaste a la UPEU");
+                                            System.out.println("╚══════════════════════════════╝");
+                                        }
+                                    } else {
+                                        vuelto_2=(-1 * nue_vueltos);
+                                        System.out.println("NO puedes subir,te falta: "+vuelto_2 + " soles");
+                                        System.out.println("________________");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        vuelto_1=(-1 * vuelto);
+                        System.out.println("NO puedes subir,te falta: "+vuelto_1 + " soles");
+                        System.out.println("_______________");
+                    }
+                }
+            }
+        }
+        while (pasaje==0);{
+            System.out.println("____________");
+            System.out.println("        !!!!!GRACIAS¡¡¡¡¡");
+            System.out.println("      Que tenga un buen día");
+            System.out.println("____________");
+        }
+    }
+}
