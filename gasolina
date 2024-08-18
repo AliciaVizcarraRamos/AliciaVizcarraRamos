@@ -1,0 +1,145 @@
+import java.util.Scanner;
+public class CLASS{
+    public static void main(String[] args){
+        Scanner vizcarra=new Scanner(System.in);
+        System.out.println("--BIENVENIDO AL GRIFO  FUEGO --");
+        System.out.println(" Seleccion el servicio que desea:GASOLINA/SNACKS");
+        String servicio="";
+        servicio= vizcarra.nextLine();
+        vizcarra.nextLine();
+        switch (servicio){
+            case "GASOLINA":
+                System.out.println(" Los tipos de gasolina que puede comprar son:");
+                System.out.println(" 1). 84 ---> S/.15.00 ");
+                System.out.println(" 2). 91 ---> S/.16.00 ");
+                System.out.println(" 3). 95 ---> S/.17.00 ");
+                System.out.println(" Elija la opcion de precio del tipo de gasolina que desea ");
+                int opciongasolina= vizcarra.nextInt();
+                switch (opciongasolina){
+                    case 1:
+                        int litros, total;
+                        System.out.println(" Eligio la opcion 1). 84 ---> S/.15.00 ");
+                        System.out.println(" Ingrese cuantos litros desea ");
+                        litros= vizcarra.nextInt();
+                        total=litros*15;
+                        System.out.println(" El total a pagar es " +total);
+                        if (total>200){
+                            double descuento, porcentaje, totalcondescuento;
+                            porcentaje=10;
+                            descuento=(total*porcentaje)/100;
+                            totalcondescuento=total-descuento;
+                            System.out.println(" Usted hizo una compra mayor a S/.200.00 por ende se le realiza un descuento del 10% ");
+                            System.out.println(" El descuento es de " +descuento);
+                            System.out.println(" El total a pagar es de "+totalcondescuento);
+
+                        }
+                        else {
+                            System.out.println(" Usted no hizo una compra mayor a S/.200.00 por ende no tiene descuento ");
+                        }
+                        break;
+                    case 2:
+                        int litros2, total2;
+                        System.out.println(" Eligio la opcion 2). 91 ---> S/.16.00 ");
+                        System.out.println(" Ingrese cuantos litros desea ");
+                        litros2= vizcarra.nextInt();
+                        total2=litros2*16;
+                        System.out.println(" El total a pagar es " +total2);
+                        if (total2>200){
+                            double descuento, porcentaje, totalcondescuento;
+                            porcentaje=10;
+                            descuento=(total2*porcentaje)/100;
+                            totalcondescuento=total2-descuento;
+                            System.out.println(" Usted hizo una compra mayor a S/.200.00 por ende se le realiza un descuento del 10% ");
+                            System.out.println(" El descuento es de " +descuento);
+                            System.out.println(" El total a pagar es de "+totalcondescuento);
+
+                        }
+                        else {
+                            System.out.println(" Usted no hizo una compra mayor a S/.200.00 por ende no tiene descuento ");
+                        }
+                        break;
+                    case 3:
+                        int litros3, total3;
+                        System.out.println(" Eligio la opcion 3). 95 ---> S/.17.00 ");
+                        System.out.println(" Ingrese cuantos litros desea ");
+                        litros3= vizcarra.nextInt();
+                        total3=litros3*17;
+                        System.out.println(" El total a pagar es " +total3);
+                        if (total3>200){
+                            double descuento, porcentaje, totalcondescuento;
+                            porcentaje=10;
+                            descuento=(total3*porcentaje)/100;
+                            totalcondescuento=total3-descuento;
+                            System.out.println(" Usted hizo una compra mayor a S/.200.00 por ende se le realiza un descuento del 10% ");
+                            System.out.println(" El descuento es de " +descuento);
+                            System.out.println(" El total a pagar es de "+totalcondescuento);
+
+                        }
+                        else {
+                            System.out.println(" Usted no hizo una compra mayor a S/.200.00 por ende no tiene descuento ");
+                        }
+                        break;
+                    default:
+                }
+                break;
+            case "SNACKS":
+                System.out.println("Los tipos de Snacks que puede comprar son: ");
+                System.out.println(" 1). Papitas lays ---> S/.3.00 ");
+                System.out.println(" 2). Gaseosa Coca Cola --->S/.8.00 ");
+                System.out.println(" 3). Cuates ---> S/.2.00 ");
+                System.out.println(" Elija la opcion de tipo de Snack que desea ");
+                int opcionsnack= vizcarra.nextInt();
+                switch (opcionsnack){
+                    case 1:
+                        int unidades, total;
+                        System.out.println(" Eligio la opcion 1). Papitas lays ---> S/.3.00 ");
+                        System.out.println(" Ingrese cuantas unidades desea ");
+                        unidades= vizcarra.nextInt();
+                        total=unidades*3;
+                        System.out.println(" El total a pagar es de " +total);
+                        if (total>30){
+                            System.out.println(" Usted hizo una compra mayor a S/.30.00 por ende puede solicitar un obsequio (UN AMBIENTADOR DE AUTO) ");
+
+                        }
+                        else {
+                            System.out.println(" Usted no hizo una compra mayor a S/.30.00 por ende no obtiene un obsequio ");
+                        }
+                        break;
+                    case 2:
+                        int unidades2, total2;
+                        System.out.println(" Eligio la opcion 2). Gaseosa Coca Cola --->S/.8.00 ");
+                        System.out.println(" Ingrese cuantas unidades desea ");
+                        unidades2= vizcarra.nextInt();
+                        total2=unidades2*8;
+                        System.out.println(" El total a pagar es de " +total2);
+                        if (total2>30){
+                            System.out.println(" Usted hizo una compra mayor a S/.30.00 por ende puede solicitar un obsequio (UN AMBIENTADOR DE AUTO) ");
+
+                        }
+                        else {
+                            System.out.println(" Usted no hizo una compra mayor a S/.30.00 por ende no obtiene un obsequio ");
+                        }
+                        break;
+                    case 3:
+                        int unidades3, total3;
+                        System.out.println(" Eligio la opcion 3). Cuates ---> S/.2.00 ");
+                        System.out.println(" Ingrese cuantas unidades desea ");
+                        unidades3= vizcarra.nextInt();
+                        total3=unidades3*2;
+                        System.out.println(" El total a pagar es de " +total3);
+                        if (total3>30){
+                            System.out.println(" Usted hizo una compra mayor a S/.30.00 por ende puede solicitar un obsequio (UN AMBIENTADOR DE AUTO) ");
+
+                        }
+                        else {
+                            System.out.println(" Usted no hizo una compra mayor a S/.30.00 por ende no obtiene un obsequio ");
+                        }
+                        break;
+                    default:
+                }
+                break;
+            default:
+        }
+    }
+}
+
