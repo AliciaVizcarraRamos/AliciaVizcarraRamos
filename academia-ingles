@@ -1,0 +1,74 @@
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.Period;
+
+public class Academia_Ingles{
+    private int edad;
+    private String curso, turno;
+
+    public void fEDAD (){
+        Scanner invoker = new Scanner(System.in);
+        System.out.println("Ingrese los datos de la persona que va a matricularse");
+        System.out.println("Ingrese el día de su nacimiento (DD): ");
+        int dia = invoker.nextInt();
+        System.out.println("Ingrese el mes de su nacimiento (MM): ");
+        int mes = invoker.nextInt();
+        System.out.println("Ingrese el año de su nacimiento (YYYY): ");
+        int anio = invoker.nextInt();
+        LocalDate fechaNacimiento = LocalDate.of(anio, mes, dia);
+        LocalDate fechaActual = LocalDate.now();
+        edad = Period.between(fechaNacimiento, fechaActual).getYears();
+        invoker.nextLine();
+    }
+    public void fCurso() {
+        Scanner scanner = new Scanner(System.in);
+        if (edad <=18) {
+            System.out.println("Elija en que curso quiere matricularse -BASICO KIDS - INTERMEDIO KIDS - AVANZADO KIDS");
+
+        } else if (edad >18) {
+            System.out.println("Elija en que curso quiere matricularse -BASICO ADULTO - INTERMEDIO ADULTO - AVANZADO ADULTO");
+
+        }
+        curso = scanner.nextLine();
+    }
+    public void ftipoTurno() {
+        Scanner scanner = new Scanner(System.in);
+        if(edad<18)
+            System.out.println("los cursos disponibles se dan por turnos-TURNO MAÑANA - TURNO TARDE");
+        else if (edad>18)
+            System.out.println("Los cursos disponibles se dan por turnos - 1=TURNO TARDE - 2=TURNO NOCHE elija");
+        turno = scanner.nextLine();
+    }
+
+    public void fPago() {
+        double descuento;
+        double precio;
+        if (curso.contains("BASICO")) {
+            precio = 200;
+
+        } else if (curso.contains("INTERMEDIO")) {
+            precio = 250;
+        } else {
+            precio = 300;
+        }
+        if (edad < 18) {
+            descuento = precio / 2;
+        } else {
+            descuento = 0;
+        }
+        double total = precio - descuento;
+        System.out.println("Por favor realize el pago");
+        System.out.println("PRECIO TOTAL S/." + precio);
+        System.out.println("EL DESCUENTO ES DE S/." + descuento);
+        System.out.println("El total a pagar es S/." + total);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("--BIENVENIDO A LA ACADEMIA DE INGLES - HELLO--");
+        Academia_Ingles NNN = new Academia_Ingles();
+        NNN.fEDAD();
+        NNN.fCurso();
+        NNN.ftipoTurno();
+        NNN.fPago();
+    }
+}
