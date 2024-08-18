@@ -1,0 +1,114 @@
+import java.util.Scanner;
+public class Grifo_Fuego {
+    private int cant_person, opcion; // declaramos variables para usar en todas las funciones
+    private Scanner scanner = new Scanner(System.in);
+
+    public void fServicio() {
+        System.out.println("-----------------------------------------------------");
+        System.out.println("--BIENVENIDO AL GRIFO  FUEGO --");
+        System.out.println("-------------------------------------------------------");
+        System.out.println(" Seleccion el servicio que desea:GASOLINA/SNACKS");
+        String servicio = scanner.nextLine();
+        switch (servicio) {
+            case "GASOLINA":
+                this.fGasolina();
+                break;
+            case "SNACKS":
+                this.fSnacks();
+                break;
+            default:
+                System.out.println("Opción no válida.");
+        }
+    }
+
+    public void fGasolina() {
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println(" Los tipos de gasolina que puede comprar son:");
+        System.out.println(" 1). 84 ---> S/.15.00 ");
+        System.out.println(" 2). 91 ---> S/.16.00 ");
+        System.out.println(" 3). 95 ---> S/.17.00 ");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println(" Elija la opcion de precio del tipo de gasolina que desea ");
+        int opciongasolina = scanner.nextInt();
+        switch (opciongasolina) {
+            case 1:
+                this.fPago(15);
+                break;
+            case 2:
+                this.fPago(16);
+                break;
+            case 3:
+                this.fPago(17);
+                break;
+            default:
+                System.out.println("Opción no válida.");
+        }
+    }
+
+    public void fSnacks() {
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("Los tipos de Snacks que puede comprar son: ");
+        System.out.println(" 1). Papitas lays ---> S/.3.00 ");
+        System.out.println(" 2). Gaseosa Coca Cola --->S/.8.00 ");
+        System.out.println(" 3). Cuates ---> S/.2.00 ");
+        System.out.println("-------------------------------------------------------");
+        System.out.println(" Elija la opcion de tipo de Snack que desea ");
+        int opcionsnack = scanner.nextInt();
+        switch (opcionsnack) {
+            case 1:
+                this.fPagosnacks(3);
+                break;
+            case 2:
+                this.fPagosnacks(8);
+                break;
+            case 3:
+                this.fPagosnacks(2);
+                break;
+            default:
+                System.out.println("Opción no válida.");
+        }
+    }
+
+    public void fPago(int precio) {
+        int litros, total;
+        System.out.println(" Ingrese cuantas litros desea ");
+
+        litros = scanner.nextInt();
+        total = litros * precio;
+        System.out.println(" El total a pagar es de " + total);
+        if (total > 200) {
+            double descuento, porcentaje, totalcondescuento;
+            porcentaje = 10;
+            descuento = (total * porcentaje) / 100;
+            totalcondescuento = total - descuento;
+            System.out.println(" Usted hizo una compra mayor a S/.200.00 por ende se le realiza un descuento del 10% ");
+            System.out.println(" El descuento es de " + descuento);
+            System.out.println(" El total a pagar es de " + totalcondescuento);
+        } else {
+            System.out.println(" Usted no hizo una compra mayor a S/.200.00 por ende no tiene descuento ");
+        }
+
+    }
+
+
+    public void fPagosnacks(int precio) {
+        int unidades, total;
+        System.out.println(" Ingrese cuantas unidades desea ");
+        unidades = scanner.nextInt();
+        total = unidades * precio;
+        System.out.println(" El total a pagar es de " + total);
+        if (total > 30) {
+            System.out.println(" Usted hizo una compra mayor a S/.30.00 por ende puede solicitar un obsequio (UN AMBIENTADOR DE AUTO)");
+        } else {
+            System.out.println(" Usted" +
+                    " no hizo una compra mayor a S/.30.00 por ende no obtiene un obsequio ");
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("----BIENVENIDO A SU GRIFO DE CONFIANZA---");
+        Grifo_Fuego grifo = new Grifo_Fuego();
+        grifo.fServicio();
+    }
+}
