@@ -1,0 +1,52 @@
+ort java.util.Scanner;
+
+public class declaracionbb {
+    public static void main(String[] args) {
+        String respuesta = "";
+        int edad;
+        Scanner love = new Scanner(System.in);
+        System.out.println("--¿CUANTOS AÑOS TIENES--?");
+        edad = love.nextInt();
+        love.nextLine();
+        if (edad > 18) {
+            do {
+                System.out.println("¿_-❤QUIERES SER MI NOVIA❤-_?");
+                respuesta = love.nextLine();
+
+
+            } while (!respuesta.equals("SI"));
+             System.out.println("----❤no imagine que esto pasaria❤----");
+
+        } else if (edad < 18) {
+            System.out.println("PROHIBIDO");
+            System.out.println("(---NOSE PUEDE DECLARAR ES  PULPIN :( ---)");
+            System.out.println("intenta con una de tu edad");
+        }
+    }
+}
+import java.util.Scanner;
+
+public class declaracionbb {
+    public static void main(String[] args) {
+        String respuesta = "";
+        int edad;
+        Scanner vic = new Scanner(System.in);
+        System.out.println("--¿CUANTOS AÑOS TIENES--?");
+        edad = vic.nextInt();
+        vic.nextLine();
+        if (edad > 18) {
+            do {
+                System.out.println("¿_♥ QUIERES SER MI NOVIA♥ _?");
+
+
+
+                respuesta = vic.nextLine();
+
+
+            } while (!respuesta.equals("SI"));
+
+        } else if (edad < 18) {
+            System.out.println("PROHIBIDO");
+        }
+    }
+}
