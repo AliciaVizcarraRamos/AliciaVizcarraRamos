@@ -1,0 +1,165 @@
+import java.util.Scanner;
+public class veterinariabobi {
+    public static void main(String[]args){
+        String opc_compra="";
+        Scanner bobi=new Scanner(System.in);
+        System.out.println("BIEVENIDO A LA VETERINARIA FIRULAIS");
+        System.out.println("elija su compra:ropa/alimentos");
+        opc_compra=bobi.nextLine();
+        switch(opc_compra){
+            case"ropa":
+                int medida;
+                System.out.println("ingrese la medida del cuello de su mascota");
+                medida=bobi.nextInt();
+                if(medida>20 && medida<=35){
+                    String talla_ropa_pequeño="";
+                    System.out.println("elija entre estas tallas disponibles=xs/s");
+                    bobi.nextLine();
+                    talla_ropa_pequeño= bobi.nextLine();
+                    switch("talla_ropa_pequeño"){
+                        case "XS":
+                            double precio_xs=15.00, preciototal;
+                            int unidad;
+                            System.out.println("¿Cuantas unidades comprarás?");
+                            unidad= bobi.nextInt();
+                            preciototal=unidad*precio_xs;
+                            System.out.println("El total a pagar es :" +preciototal);
+                            System.out.println(" Gracias por su compra");
+                            break;
+                        case "S":
+                            double precio_s=20.00, preciototals;
+                            int unidads;
+                            System.out.println("¿Cuantas unidades comprarás?");
+                            unidads= bobi.nextInt();
+                            preciototals=unidads*precio_s;
+                            System.out.println("El total a pagar es :" +preciototals);
+                            System.out.println(" Gracias por su compra");
+                            break;
+                    }
+                }
+                else if (medida>=36 && medida<=45) {
+                    String talla_ropa_mediano="";
+                    System.out.println("Elija entre estas tallas disponibles: M/L");
+                    talla_ropa_mediano= bobi.nextLine();
+                    switch(talla_ropa_mediano){
+                        case "M":
+                            double precio_m=25.00, preciototalm;
+                            int unidadm;
+                            System.out.println("¿Cuantas unidades comprarás?");
+                            unidadm= bobi.nextInt();
+                            preciototalm=unidadm*precio_m;
+                            System.out.println("El total a pagar es :" +preciototalm);
+                            System.out.println(" Gracias por su compra");
+                            break;
+                        case "L":
+                            double precio_l=30.00, preciototall;
+                            int unidadl;
+                            System.out.println("¿Cuantas unidades comprarás?");
+                            unidadl= bobi.nextInt();
+                            preciototall=unidadl*precio_l;
+                            System.out.println("El total a pagar es :" +preciototall);
+                            System.out.println(" Gracias por su compra");
+                            break;
+                    }
+
+
+                }
+                else if (medida>=46 && medida<=55) {
+                    String talla_ropa_grande = "";
+                    System.out.println("Elija entre estas tallas disponibles: XL/XXL");
+                    talla_ropa_grande = bobi.nextLine();
+                    switch (talla_ropa_grande) {
+                        case "XL":
+                            double precio_xl = 35.00, preciototalxl;
+                            int unidadxl;
+                            System.out.println("¿Cuantas unidades comprarás?");
+                            unidadxl = bobi.nextInt();
+                            preciototalxl = unidadxl * precio_xl;
+                            System.out.println("El total a pagar es :" + preciototalxl);
+                            System.out.println(" Gracias por su compra");
+                            break;
+                        case "XXL":
+                            double precio_xxl = 40.00, preciototalxxl;
+                            int unidadl;
+                            System.out.println("¿Cuantas unidades comprarás?");
+                            unidadl = bobi.nextInt();
+                            preciototalxxl = unidadl * precio_xxl;
+                            System.out.println("El total a pagar es :" + preciototalxxl);
+                            System.out.println(" Gracias por su compra");
+                            break;
+                    }
+                }
+                else if(medida>=55 &&medida<=100){
+                    System.out.println("No existe ese tamaño de cuello");
+                }
+
+
+            case "alimentos":
+                int edad;
+                System.out.println("ingrese la edad de su mascota");
+                edad= bobi.nextInt();
+                if(edad>1){
+                    String alimento_perro_grande="";
+                    System.out.println("Eliga entre estos alimentos disponibles");
+                    bobi.nextLine();
+                    alimento_perro_grande=bobi.nextLine();
+                    switch (alimento_perro_grande){
+                        case("DogChow"):
+                            double precio_dogchow=20.00,preciototaldogchow;
+                            int kilo;
+                            System.out.println("¿cuantos kilos compraras?");
+                            kilo= bobi.nextInt();
+                            preciototaldogchow=kilo*precio_dogchow;
+                            System.out.println("El total a pagar es:"+preciototaldogchow);
+                            System.out.println("Gracias por su compra");
+                            break;
+                        case("Proback"):
+                            double precio_proback=50.00,preciototalproback;
+                            int kilos;
+                            System.out.println("¿cuantos kilos compraras?");
+                            kilos= bobi.nextInt();
+                            preciototalproback=kilos*precio_proback;
+                            System.out.println("El total a pagar es:"+preciototalproback);
+                            System.out.println("Gracias por su compra");
+                            break;
+                        case "Alimento":
+                            int edad_;
+                            System.out.println("ingrese la edad de su mascota");
+                            edad= bobi.nextInt();
+                            if(edad<1){
+                                String edad_perro_pequeño="";
+                                System.out.println("ingrese su edad de su perro ");
+                                bobi.nextLine();
+                                edad_perro_pequeño=bobi.nextLine();
+                                switch (edad_perro_pequeño){
+                                    case("Ricocan"):
+                                        double precio_ricocan=20.00,preciototalricocan;
+                                        int kilos_;
+                                        System.out.println("¿cuantos kilos compraras?");
+                                        kilos= bobi.nextInt();
+                                        preciototalricocan=kilos*precio_ricocan;
+                                        System.out.println("El total a pagar es:"+preciototalricocan);
+                                        System.out.println("Gracias por su compra");
+                                        break;
+                                    case("mimaskot"):
+                                        double precio_mimaskot=50.00,preciototalmimaskot;
+                                        int cantidad_;
+                                        System.out.println("¿cuantos kilos compraras?");
+                                        kilo= bobi.nextInt();
+                                        preciototalmimaskot=kilo*precio_mimaskot;
+                                        System.out.println("El total a pagar es:"+preciototalmimaskot);
+                                        System.out.println("Gracias por su compra");
+                                        break;
+                                    default:
+                                        System.out.println("Opcion no valida");
+
+                                }
+                            }else{
+                                System.out.println("opcion no valida .Porfavor ingrese,Ropa o Alimentos");
+                            }
+                    }  }
+
+        }
+    }
+}
+
