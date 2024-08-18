@@ -1,0 +1,1148 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+public class UNIDAD_3_STARBUCKS {
+    public static List<Double> precios_masMENUS_seleccionados = new ArrayList<>();
+    public static List<Double> precios_menu_selecionados = new ArrayList<>();
+    public static List<String> menu_seleccionados = new ArrayList<>();
+    public static List<String> masmenus_seleccionados = new ArrayList<>();
+    public static List<Integer> cantidades_menu_seleccionados = new ArrayList<>();
+    public static List<String> promociones_selecionadas = new ArrayList<>();
+    public static List<Double> precios_promociones_selecionadas = new ArrayList<>();
+    public static List<Integer> cantidades_promociones_seleccionados = new ArrayList<>();
+    public static List<String> registro_de_usuarios = new ArrayList<>();
+    public static List<String> registro_de_nombres = new ArrayList<>();
+
+    public static List<String> registro_de_contraseñas = new ArrayList<>();
+    public static String[] menuprincipal = {"1.- BEBIDASS", "2.- COMIDAS", "3.- MERCH Y CAFE", "4.- PACKSYBOXES"};
+
+    public static double igv = 0.18;
+    public static boolean registrarse = false;
+    public static boolean inicio_sesion = false;
+    public static boolean metodo_entrega;
+    public static String metodo_de_pago_seleccioando = "";
+
+    public static void menu_principal() {
+        Scanner vizcarra = new Scanner(System.in);
+        for (String MENU : menuprincipal) {
+            System.out.println(MENU);
+        }
+        System.out.println("Ingrese la opción deseada");
+        String opcion = vizcarra.nextLine();
+        switch (opcion) {
+            case "1":
+                menu_BEBIDAS(vizcarra);
+                break;
+            case "2":
+                Menu_COMIDAS(vizcarra);
+                break;
+            case "3":
+                menu_merch(vizcarra);
+                break;
+            case "4":
+                menu_PACKS(vizcarra);
+                break;
+            case "5":
+                carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados,
+                        menu_seleccionados, masmenus_seleccionados);
+                break;
+            case "6":
+                pagina_principal();
+                break;
+            default:
+                System.out.println("Opción no válida.");
+                break;
+        }
+    }
+
+    private static void carrito(List<Integer> cantidadesMenuSeleccionados, List<Double> preciosMasMENUSSeleccionados, List<Double> preciosMenuSelecionados, List<String> menuSeleccionados, List<String> masmenusSeleccionados) {
+    }
+
+    private static void getFechaHora(Scanner vizcarra) {
+        int[] fecha = new int[3];
+        System.out.println("Ingrese el día: ");
+        fecha[0] = vizcarra.nextInt();
+        System.out.println("Ingrese el mes: ");
+        fecha[1] = vizcarra.nextInt();
+        System.out.println("Ingrese el año: ");
+        fecha[2] = vizcarra.nextInt();
+        LocalDate fechaIngresada = LocalDate.of(fecha[2], fecha[1], fecha[0]);
+
+        DateTimeFormatter formatterFecha = DateTimeFormatter.ofPattern("d-M-yyyy");
+        String fechaFormateada = fechaIngresada.format(formatterFecha);
+
+        System.out.println("La fecha ingresada es: " + fechaFormateada);
+
+        int[] hora = new int[3];
+        System.out.println("Ingrese la hora: ");
+        hora[0] = vizcarra.nextInt();
+        System.out.println("Ingrese el minuto: ");
+        hora[1] = vizcarra.nextInt();
+        System.out.println("Ingrese el segundo: ");
+        hora[2] = vizcarra.nextInt();
+        LocalTime horaIngresada = LocalTime.of(hora[0], hora[1], hora[2]);
+
+        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaFormateada = horaIngresada.format(formatterHora);
+
+        System.out.println("La hora ingresada es: " + horaFormateada);
+
+        LocalDate fechaActual = LocalDate.now();
+        String fechaActualFormateada = fechaActual.format(formatterFecha);
+        System.out.println("La fecha actual es: " + fechaActualFormateada);
+
+        LocalTime horaActual = LocalTime.now();
+        String horaActualFormateada = horaActual.format(formatterHora);
+        System.out.println("La hora actual es: " + horaActualFormateada);
+    }
+
+    static String[][] menu_merch = {
+            {"1 .Prensa Francesa (S/ 160.00)", "2 .Prensa Cold Brew (S/ 160.00)"},
+            {"3 .Prensa Pour Over (S/ 80.0)", "4 .Peru (S/ 37.0)"},
+            {"5 .Espresso Roast (S/ 37.00)", "6 .Verona (S/ 37.00)"}
+    };
+    static double[] precio_merch = {160.00, 160.00, 80.00, 37.00, 37.00, 37.00};
+    static String[][] menu_masMENU_starbucks = {
+            {"1 .FRAPPUCCINOS (S/ 16.50)", "2 .PASTRIES (S/ 15.50)", "3 .Prensa Francesa (S/ 160.00)"},
+            {"4 .EXPRESESCALIENTE (S/ 15.50)", "5 .POSTRES (S/ 10.0)", "6 .Prensa Cold Brew (S/ 160.00)"},
+            {"7 .ESPRESSO FRIO (S/ 19.50)", "8 .SANDWICHES (S/ 10.00)", "9 .Prensa Pour Over (S/ 80.00)"},
+            {"10 .Caramel Ribbon Crunch (S/ 4.90)", "11 .Crocante de manzana vegetal (S/ 10.00)", "12 .Peru (S/ 4.90)"},
+            {"13 .Coffee Traveler (S/ 60.0)", "14 .Duo Desayuno (S/ 4.90)", "15 .Muffins 4 share (S/ 32.00)"},
+            {"16 .Pack Coffee Mixto(S/ 120.00)", "17 .Pack Coffee Sandwich (S/ 13.00)", "18 .Sweet &  share (S/ 4.90)"}
+    };
+    static double[] precios_masMENU = {
+            16.50, 15.50, 160.00,
+            16.50, 10.00, 160.00,
+            19.50, 10.0, 80.00,
+            16.50, 10.00, 37.00,
+            60.00, 11.00, 32.00,
+            120.00, 135.00, 20.00
+    };
+
+    static String[][] menu_BEBIDAS = {
+            {"1 .FRAPPUCCINOS (S/ 16.50)", "2 .EXPRESESCALIENTE (S/ 16.50)"},
+            {"3 .ESPRESSO FRIO (S/ 19.50)", "4 .Caramel Ribbon Crunch (S/ 16.50)"},
+    };
+    static double[] precio_de_bebidas = {16.50, 16.50, 19.50, 16.50};
+
+    static String[][] menu_COMIDAS = {
+            {"1 .PASTRIES (S/ 15.50)", "2 .POSTRES + 2 PAPAS (S/ 10.00)"},
+            {"3 .SANDWICHES (S/ 10.00)", "4 .Crocante de manzana vegetal (S/ 10.00)"}
+    };
+    static double[] precio_comidas = {15.50, 10.00, 10.00, 10.00};
+
+    static String[][] menu_PACKS = {
+            {"1 .Coffee Traveler (S/ 20.90)", "2 .Pack Coffee Mixto (S/ 24.90)"},
+            {"3 .Pack Coffee Sandwich (S/ 24.90)", "4 .Duo Desayuno (S/ 24.90)"}
+    };
+    static double[] precio_PACKSYBOXES = {20.90, 24.90, 24.90, 24.90};
+
+
+    static void menu_BEBIDAS
+            (Scanner vizcarra) {
+        System.out.println("Menú BEBIDAS seleccionado");
+        seleccionacion_menu_BEBIDAS(vizcarra);
+    }
+
+    public static void Menu_COMIDAS(Scanner wali) {
+        System.out.println("Menú PARA 2 seleccionado");
+        seleccionacion_menu_COMIDAS(wali);
+    }
+
+    public static void menu_merch(Scanner wali) {
+        System.out.println("Menú_merch seleccionado");
+        seleccionacion_menu_MERCH(wali);
+    }
+
+    public static void menu_PACKS(Scanner wali) {
+        System.out.println("Menú_packs seleccionado");
+        seleccionacion_menu_PACKS(wali);
+    }
+
+
+    public static void seleccionacion_menu_BEBIDAS(Scanner vizcarra) {
+        List<Double> precios_complementos_seleccionados_temp = new ArrayList<>();
+        List<Double> precios_menu_selecionados_temp = new ArrayList<>();
+        List<String> menu_seleccionados_temp = new ArrayList<>();
+        List<String> complementos_seleccionados_temp = new ArrayList<>();
+        List<Integer> cantidades_menu_seleccionados_temp = new ArrayList<>();
+        double precio_seleccionado = 0.0;
+        int cantidad_producto = 0;
+
+        for (String[] fila : menu_BEBIDAS) {
+            System.out.printf("%-50s%-50s%n", fila[0], fila[1]);
+        }
+        System.out.println("Seleccione una opción");
+        String opcion = vizcarra.nextLine();
+        int opcion_entero = Integer.parseInt(opcion);
+        if (opcion_entero >= 1 && opcion_entero <= precio_de_bebidas.length) {
+            System.out.println("Seleccionó " + menu_BEBIDAS[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precio_seleccionado = precio_de_bebidas[opcion_entero - 1];
+            menu_seleccionados_temp.add(menu_BEBIDAS[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precios_menu_selecionados_temp.add(precio_seleccionado);
+            cantidades_menu_seleccionados_temp.add(cantidad_producto);
+            menu_seleccionados.addAll(menu_seleccionados_temp);
+            precios_menu_selecionados.addAll(precios_menu_selecionados_temp);
+
+        } else {
+            System.out.println("opción no válida.");
+        }
+        System.out.println("¿Cuántas unidades desea comprar?");
+        cantidad_producto = vizcarra.nextInt();
+        cantidades_menu_seleccionados_temp.add(cantidad_producto);
+        cantidades_menu_seleccionados.add(cantidad_producto);
+        vizcarra.nextLine();
+        System.out.println("¿Desea COMPRAR ALGO MAS?");
+        for (int i = 0; i < menu_masMENU_starbucks.length; i++) {
+            String[] fila = menu_masMENU_starbucks[i];
+            System.out.printf("%-50s%-50s%-50s%n", fila[0], fila[1], fila[2]);
+        }
+        int opcion_masMENU;
+        while ((opcion_masMENU = vizcarra.nextInt()) != 0) {
+            if (opcion_masMENU > 0 && opcion_masMENU <= precios_masMENU.length) {
+                complementos_seleccionados_temp.add(menu_masMENU_starbucks[(opcion_masMENU - 1) / 3][(opcion_masMENU - 1) % 3]);
+                precios_complementos_seleccionados_temp.add(precios_masMENU[opcion_masMENU - 1]);
+                masmenus_seleccionados.addAll(complementos_seleccionados_temp);
+                precios_masMENUS_seleccionados.addAll(precios_complementos_seleccionados_temp);
+            } else {
+                System.out.println("Opción no válida.");
+            }
+            System.out.println("Ingrese el número del MENU_QUE_LE OFRECEMOS que desea agregar y si no desea algo mas escriba ( 0 ):");
+        }
+        vizcarra.nextLine();
+        double totalPedido = compra(cantidad_producto, precio_seleccionado, precios_masMENUS_seleccionados, precios_promociones_selecionadas);
+        informacion_COMPRA(totalPedido, menu_seleccionados_temp, cantidad_producto, complementos_seleccionados_temp, precios_menu_selecionados_temp, precios_complementos_seleccionados_temp);
+        System.out.println("desea añadirlo a su carrito? (SI/NO)");
+        opcion = vizcarra.nextLine();
+        if (opcion.equalsIgnoreCase("si")) {
+            System.out.println("desea:");
+            System.out.println("1.- seguir comprando(volver al menu)");
+            System.out.println("2.- Relizar el pago su pedido");
+            System.out.println("3.- ver su carrito");
+            System.out.println("4.- volver a la pagina principal");
+            opcion = vizcarra.nextLine();
+            switch (opcion) {
+                case "1":
+                    menu_principal();
+                    break;
+                case "2":
+                    System.out.println(" ");
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+                    break;
+                case "3":
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+
+                    break;
+                case "4":
+                    pagina_principal();
+                    break;
+            }
+
+        } else {
+            System.out.println("desea realizar el pago de su pedido? (SI/NO)");
+            opcion = vizcarra.nextLine();
+            if (opcion.equalsIgnoreCase("si")) {
+                carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+            } else {
+                System.out.println("su pedido se a cancelado");
+                System.out.println("No, nos dejes, deseaa..");
+                System.out.println("1.- volver al menu principal");
+                System.out.println("2.- volver a la pagina principal");
+                System.out.println("3.- salir");
+                opcion = vizcarra.nextLine();
+                switch (opcion) {
+                    case "1":
+                        menu_principal();
+                        break;
+                    case "3":
+                        System.out.println("gracias por visitar A starbucks");
+                        System.out.println("esperamos, que vuelva pronto");
+                        break;
+                }
+            }
+        }
+    }
+
+    public static void seleccionacion_menu_COMIDAS
+            (Scanner vizcarra) {
+        List<Double> precios_complementos_seleccionados_temp = new ArrayList<>();
+        List<Double> precios_menu_selecionados_temp = new ArrayList<>();
+        List<String> menu_seleccionados_temp = new ArrayList<>();
+        List<String> complementos_seleccionados_temp = new ArrayList<>();
+        List<Integer> cantidades_menu_seleccionados_temp = new ArrayList<>();
+        double precio_seleccionado = 0.0;
+        int cantidad_producto = 0;
+
+        for (String[] fila : menu_COMIDAS) {
+            System.out.printf("%-50s%-50s%n", fila[0], fila[1]);
+        }
+        System.out.println("Seleccione una opción");
+        String opcion = vizcarra.nextLine();
+        int opcion_entero = Integer.parseInt(opcion);
+        if (opcion_entero >= 1 && opcion_entero <= precio_comidas.length) {
+            System.out.println("Seleccionó " + menu_COMIDAS[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precio_seleccionado = precio_comidas[opcion_entero - 1];
+            menu_seleccionados_temp.add(menu_COMIDAS[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precios_menu_selecionados_temp.add(precio_seleccionado);
+            cantidades_menu_seleccionados_temp.add(cantidad_producto);
+            menu_seleccionados.addAll(menu_seleccionados_temp);
+            precios_menu_selecionados.addAll(precios_menu_selecionados_temp);
+
+        } else {
+            System.out.println("opción no válida.");
+        }
+        System.out.println("¿Cuántas unidades desea comprar?");
+        cantidad_producto = vizcarra.nextInt();
+        cantidades_menu_seleccionados_temp.add(cantidad_producto);
+        cantidades_menu_seleccionados.add(cantidad_producto);
+        vizcarra.nextLine();
+        System.out.println("¿Desea añadir algún masMENU?");
+        for (int i = 0; i < menu_masMENU_starbucks.length; i++) {
+            String[] fila = menu_masMENU_starbucks[i];
+            System.out.printf("%-50s%-50s%-50s%n", fila[0], fila[1], fila[2]);
+        }
+        int opcion_masMENU;
+        while ((opcion_masMENU = vizcarra.nextInt()) != 0) {
+            if (opcion_masMENU > 0 && opcion_masMENU <= precios_masMENU.length) {
+                complementos_seleccionados_temp.add(menu_masMENU_starbucks[(opcion_masMENU - 1) / 3][(opcion_masMENU - 1) % 3]);
+                precios_complementos_seleccionados_temp.add(precios_masMENU[opcion_masMENU - 1]);
+                masmenus_seleccionados.addAll(complementos_seleccionados_temp);
+                precios_masMENUS_seleccionados.addAll(precios_complementos_seleccionados_temp);
+            } else {
+                System.out.println("Opción no válida.");
+            }
+            System.out.println("Ingrese el número del MENU_QUE_LE OFRECEMOS que desea agregar y si no desea algo mas escriba ( 0 ):");
+        }
+        vizcarra.nextLine();
+        double totalPedido = compra(cantidad_producto, precio_seleccionado, precios_masMENUS_seleccionados, precios_promociones_selecionadas);
+        informacion_COMPRA(totalPedido, menu_seleccionados_temp, cantidad_producto, complementos_seleccionados_temp, precios_menu_selecionados_temp, precios_complementos_seleccionados_temp);
+        System.out.println("desea añadirlo a su carrito? (SI/NO)");
+        opcion = vizcarra.nextLine();
+        if (opcion.equalsIgnoreCase("si")) {
+            System.out.println("desea:");
+            System.out.println("1.- seguir comprando(volver al menu)");
+            System.out.println("2.- realizar el pago su pedido");
+            System.out.println("3.- ver su carrito");
+            System.out.println("4.- volver a la pagina principal");
+            opcion = vizcarra.nextLine();
+            switch (opcion) {
+                case "1":
+                    menu_principal();
+                    break;
+                case "2":
+                    System.out.println(" ");
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+                    break;
+                case "3":
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+                    break;
+                case "4":
+                    pagina_principal();
+                    break;
+            }
+
+        } else {
+            System.out.println("desea realizar el pago de su pedido? (SI/NO)");
+            opcion = vizcarra.nextLine();
+            if (opcion.equalsIgnoreCase("si")) {
+                carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+            } else {
+                System.out.println("su pedido se a cancelado");
+                System.out.println("No, nos dejes, deseaa..");
+                System.out.println("1.- volver al menu principal");
+                System.out.println("2.- volver a la pagina principal");
+                System.out.println("3.- salir");
+                opcion = vizcarra.nextLine();
+                switch (opcion) {
+                    case "1":
+                        menu_principal();
+                        break;
+                    case "3":
+                        System.out.println("gracias por visitar la pagina de KFC");
+                        System.out.println("esperamos, que vuelva pronto");
+                        break;
+                }
+            }
+        }
+    }
+
+    public static void seleccionacion_menu_MERCH
+            (Scanner vizcarra) {
+        List<Double> precios_complementos_seleccionados_temp = new ArrayList<>();
+        List<Double> precios_menu_selecionados_temp = new ArrayList<>();
+        List<String> menu_seleccionados_temp = new ArrayList<>();
+        List<String> complementos_seleccionados_temp = new ArrayList<>();
+        List<Integer> cantidades_menu_seleccionados_temp = new ArrayList<>();
+        double precio_seleccionado = 0.0;
+        int cantidad_producto = 0;
+
+        for (String[] fila : menu_PACKS) {
+            System.out.printf("%-50s%-50s%n", fila[0], fila[1]);
+        }
+        System.out.println("Seleccione una opción");
+        String opcion = vizcarra.nextLine();
+        int opcion_entero = Integer.parseInt(opcion);
+        if (opcion_entero >= 1 && opcion_entero <= precio_merch.length) {
+            System.out.println("Seleccionó " + menu_merch[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precio_seleccionado = precio_merch[opcion_entero - 1];
+            menu_seleccionados_temp.add(menu_merch[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precios_menu_selecionados_temp.add(precio_seleccionado);
+            cantidades_menu_seleccionados_temp.add(cantidad_producto);
+            menu_seleccionados.addAll(menu_seleccionados_temp);
+            precios_menu_selecionados.addAll(precios_menu_selecionados_temp);
+
+        } else {
+            System.out.println("opción no válida.");
+        }
+        System.out.println("¿Cuántas unidades desea comprar?");
+        cantidad_producto = vizcarra.nextInt();
+        cantidades_menu_seleccionados_temp.add(cantidad_producto);
+        cantidades_menu_seleccionados.add(cantidad_producto);
+        vizcarra.nextLine();
+        System.out.println("¿Desea añadir algún complemento?");
+        for (int i = 0; i < menu_masMENU_starbucks.length; i++) {
+            String[] fila = menu_masMENU_starbucks[i];
+            System.out.printf("%-50s%-50s%-50s%n", fila[0], fila[1], fila[2]);
+        }
+        int opcion_masMENU;
+        while ((opcion_masMENU = vizcarra.nextInt()) != 0) {
+            if (opcion_masMENU > 0 && opcion_masMENU <= precios_masMENU.length) {
+                complementos_seleccionados_temp.add(menu_masMENU_starbucks[(opcion_masMENU - 1) / 3][(opcion_masMENU - 1) % 3]);
+                precios_complementos_seleccionados_temp.add(precios_masMENU[opcion_masMENU - 1]);
+                masmenus_seleccionados.addAll(complementos_seleccionados_temp);
+                precios_masMENUS_seleccionados.addAll(precios_complementos_seleccionados_temp);
+            } else {
+                System.out.println("Opción no válida.");
+            }
+            System.out.println("Ingrese el número del MENU_QUE_LE OFRECEMOS que desea agregar y si no desea algo mas escriba ( 0 ):");
+        }
+        vizcarra.nextLine();
+        double totalPedido = compra(cantidad_producto, precio_seleccionado, precios_masMENUS_seleccionados, precios_promociones_selecionadas);
+        informacion_COMPRA(totalPedido, menu_seleccionados_temp, cantidad_producto, complementos_seleccionados_temp, precios_menu_selecionados_temp, precios_complementos_seleccionados_temp);
+        System.out.println("desea añadirlo a su carrito? (SI/NO)");
+        opcion = vizcarra.nextLine();
+        if (opcion.equalsIgnoreCase("si")) {
+            System.out.println("desea:");
+            System.out.println("1.- seguir comprando(volver al menu)");
+            System.out.println("2.- realizar el pago su pedido");
+            System.out.println("3.- ver su carrito");
+            System.out.println("4.- volver a la pagina principal");
+            opcion = vizcarra.nextLine();
+            switch (opcion) {
+                case "1":
+                    menu_principal();
+                    break;
+                case "2":
+                    System.out.println(" ");
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+                    break;
+                case "3":
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+                    break;
+                case "4":
+                    pagina_principal();
+                    break;
+            }
+
+        } else {
+            System.out.println("desea realizar el pago de su pedido? (SI/NO)");
+            opcion = vizcarra.nextLine();
+            if (opcion.equalsIgnoreCase("si")) {
+                carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+            } else {
+                System.out.println("su pedido se a cancelado");
+                System.out.println("No, nos dejes, deseaa..");
+                System.out.println("1.- volver al menu principal");
+                System.out.println("2.- volver a la pagina principal");
+                System.out.println("3.- salir");
+                opcion = vizcarra.nextLine();
+                switch (opcion) {
+                    case "1":
+                        menu_principal();
+                        break;
+                    case "3":
+                        System.out.println("gracias por visitar la pagina de KFC");
+                        System.out.println("esperamos, que vuelva pronto");
+                        break;
+                }
+            }
+        }
+    }
+
+    public static void seleccionacion_menu_PACKS
+            (Scanner vizcarra) {
+        List<Double> precios_complementos_seleccionados_temp = new ArrayList<>();
+        List<Double> precios_menu_selecionados_temp = new ArrayList<>();
+        List<String> menu_seleccionados_temp = new ArrayList<>();
+        List<String> complementos_seleccionados_temp = new ArrayList<>();
+        List<Integer> cantidades_menu_seleccionados_temp = new ArrayList<>();
+        double precio_seleccionado = 0.0;
+        int cantidad_producto = 0;
+
+        for (String[] fila : menu_PACKS) {
+            System.out.printf("%-50s%-50s%n", fila[0], fila[1]);
+        }
+        System.out.println("Seleccione una opción");
+        String opcion = vizcarra.nextLine();
+        int opcion_entero = Integer.parseInt(opcion);
+        if (opcion_entero >= 1 && opcion_entero <= precio_PACKSYBOXES.length) {
+            System.out.println("Seleccionó " + menu_PACKS[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precio_seleccionado = precio_PACKSYBOXES[opcion_entero - 1];
+            menu_seleccionados_temp.add(menu_PACKS[(opcion_entero - 1) / 2][(opcion_entero - 1) % 2]);
+            precios_menu_selecionados_temp.add(precio_seleccionado);
+            cantidades_menu_seleccionados_temp.add(cantidad_producto);
+            menu_seleccionados.addAll(menu_seleccionados_temp);
+            precios_menu_selecionados.addAll(precios_menu_selecionados_temp);
+
+        } else {
+            System.out.println("opción no válida.");
+        }
+        System.out.println("¿Cuántas unidades desea comprar?");
+        cantidad_producto = vizcarra.nextInt();
+        cantidades_menu_seleccionados_temp.add(cantidad_producto);
+        cantidades_menu_seleccionados.add(cantidad_producto);
+        vizcarra.nextLine();
+        System.out.println("¿Desea comprar algo mas de masMENU?");
+        for (int i = 0; i < menu_masMENU_starbucks.length; i++) {
+            String[] fila = menu_masMENU_starbucks[i];
+            System.out.printf("%-50s%-50s%-50s%n", fila[0], fila[1], fila[2]);
+        }
+        int opcion_complementos;
+        while ((opcion_complementos = vizcarra.nextInt()) != 0) {
+            if (opcion_complementos > 0 && opcion_complementos <= precios_masMENU.length) {
+                complementos_seleccionados_temp.add(menu_masMENU_starbucks[(opcion_complementos - 1) / 3][(opcion_complementos - 1) % 3]);
+                precios_complementos_seleccionados_temp.add(precios_masMENU[opcion_complementos - 1]);
+                masmenus_seleccionados.addAll(complementos_seleccionados_temp);
+                precios_masMENUS_seleccionados.addAll(precios_complementos_seleccionados_temp);
+            } else {
+                System.out.println("Opción no válida.");
+            }
+            System.out.println("Ingrese el número del MENU_QUE_LE OFRECEMOS que desea agregar y si no desea algo mas escriba ( 0 ):");
+        }
+        vizcarra.nextLine();
+        double totalPedido = compra(cantidad_producto, precio_seleccionado, precios_masMENUS_seleccionados, precios_promociones_selecionadas);
+        informacion_COMPRA(totalPedido, menu_seleccionados_temp, cantidad_producto, complementos_seleccionados_temp, precios_menu_selecionados_temp, precios_complementos_seleccionados_temp);
+        System.out.println("desea añadirlo a su carrito? (SI/NO)");
+        opcion = vizcarra.nextLine();
+        if (opcion.equalsIgnoreCase("si")) {
+            System.out.println("desea:");
+            System.out.println("1.- seguir comprando(volver al menu)");
+            System.out.println("2.- Realizar el pago su pedido");
+            System.out.println("3.- ver su carrito");
+            System.out.println("4.- volver a la pagina principal");
+            opcion = vizcarra.nextLine();
+            switch (opcion) {
+                case "1":
+                    menu_principal();
+                    break;
+                case "2":
+                    System.out.println(" ");
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+                    break;
+                case "3":
+                    carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+                    break;
+                case "4":
+                    pagina_principal();
+                    break;
+            }
+
+        } else {
+            System.out.println("desea realizar el pago de su pedido? (SI/NO)");
+            opcion = vizcarra.nextLine();
+            if (opcion.equalsIgnoreCase("si")) {
+                carrito(cantidades_menu_seleccionados, precios_masMENUS_seleccionados, precios_menu_selecionados, menu_seleccionados, masmenus_seleccionados, promociones_selecionadas, precios_promociones_selecionadas, cantidades_promociones_seleccionados);
+            } else {
+                System.out.println("su pedido se a cancelado");
+                System.out.println("No, nos dejes, deseaa..");
+                System.out.println("1.- volver al menu principal");
+                System.out.println("2.- volver a la pagina principal");
+                System.out.println("3.- salir");
+                opcion = vizcarra.nextLine();
+                switch (opcion) {
+                    case "1":
+                        menu_principal();
+                        break;
+                    case "3":
+                        System.out.println("gracias por visitar a STARBUCKS");
+                        System.out.println("esperamos, que vuelva pronto");
+                        break;
+                }
+            }
+        }
+    }
+
+    public static double compra(int cantidad_de_producto, double precio_seleccionado, List<Double> precios_complementos_seleccionados_temp, List<Double> precios_promociones_selecionadas_temp) {
+        double preciocomplementario = 0;
+        for (double precio : precios_complementos_seleccionados_temp) {
+            preciocomplementario += precio;
+        }
+        for (double precio_promociones : precios_promociones_selecionadas_temp) {
+            preciocomplementario += precio_promociones;
+        }
+        double pre_total = (precio_seleccionado * cantidad_de_producto);
+        return pre_total;
+    }
+
+    public static void informacion_COMPRA(double pre_total, List<String> menu_seleccionados_temp, int cantidad_de_producto, List<String> menu_complementos_temp, List<Double> precios_menu_selecionados_temp, List<Double> precios_complementos_seleccionados_temp) {
+        for (int i = 0; i < menu_seleccionados_temp.size(); i++) {
+            System.out.println("Menu: " + menu_seleccionados_temp.get(i));
+        }
+
+        System.out.println("Cantidad de producto: " + cantidad_de_producto);
+        System.out.println("precio total de menu: S/" + pre_total);
+        double total_complementos = 0;
+        for (int i = 0; i < menu_complementos_temp.size(); i++) {
+            String complemento = menu_complementos_temp.get(i).split("\\.")[1];
+            System.out.println("masMENU: " + complemento);
+            total_complementos += precios_complementos_seleccionados_temp.get(i);
+        }
+        System.out.println("Total de masMENU: S/ " + total_complementos);
+        System.out.println("Total de su compra DEL MENU + masMENU: S/ " + (pre_total + total_complementos));
+        menu_seleccionados_temp.clear();
+        precios_menu_selecionados_temp.clear();
+        menu_complementos_temp.clear();
+        precios_complementos_seleccionados_temp.clear();
+    }
+
+    public static void carrito(List<Integer> cantidades_menu_seleccionados, List<Double> precios_complementos_seleccionados, List<Double> precios_menu_selecionados, List<String> menu_seleccionados, List<String> complementos_seleccionados, List<String> promociones_selecionadas, List<Double> precios_promociones_selecionadas, List<Integer> cantidades_promociones_seleccionados) {
+        Scanner wali = new Scanner(System.in);
+        double total_precio = 0.0;
+        double total_menu = 0.0;
+        double precio_promociones = 0.0;
+        double total_promociones = 0.0;
+        System.out.println("                      Detalles del carrito:");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("  Número de menús seleccionados: " + menu_seleccionados.size());
+        for (int i = 0; i < menu_seleccionados.size(); i++) {
+            String menus = menu_seleccionados.get(i).split("\\.")[1];
+            System.out.println("-------------------------------------------------------------------------");
+            System.out.println("  MENU: " + menus);
+            System.out.println("  Cantidad de menú seleccionado: " + cantidades_menu_seleccionados.get(i));
+            System.out.println("-----------------------------------------------------------------------------------");
+            total_precio += precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i);
+            total_menu = precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i);
+            System.out.println("  total de menu. S/. " + total_menu);
+        }
+
+        System.out.println("  masMENU seleccionados:");
+        for (int i = 0; i < complementos_seleccionados.size(); i++) {
+            String complemento = complementos_seleccionados.get(i).split("\\.")[1];
+            System.out.println("  masMENU/Extras: " + complemento);
+            total_precio += precios_complementos_seleccionados.get(i);
+        }
+        System.out.println("  Total de compra(menu): S/ " + total_precio);
+        double ivg_total = total_precio * igv;
+        System.out.println("IGV : S/ " + ivg_total);
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("SU TOTAL DE COMPRA(PEDIDO) ES: " + (ivg_total + total_precio));
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("PRECIONE ENTER PARA CONTINUAR; ");
+        wali.nextLine();
+        String opcion;
+        System.out.println("1.- Realizar el pago de su carrito");
+        System.out.println("2.- volver al menu principal");
+        System.out.println("3.- volver a la pagina principal");
+        opcion = wali.nextLine();
+        switch (opcion) {
+            case "1":
+                System.out.println("PONGA (1) PARA VER QUE COMPRAS HIZO");
+                opcion = wali.nextLine();
+                switch (opcion) {
+                    case "1":
+
+                        System.out.println("                 DETALLES DE CARRITO ACTUALIZADO:");
+                        System.out.println("----------------------------------------------------------------------------");
+                        System.out.println("  Número de menús seleccionados: " + menu_seleccionados.size());
+                        for (int i = 0; i < menu_seleccionados.size(); i++) {
+                            String menus = menu_seleccionados.get(i).split("\\.")[1];
+                            System.out.println("-------------------------------------------------------------------------");
+                            System.out.println("  MENU: " + menus);
+                            System.out.println("                                                                       ");
+                            System.out.println("  Cantidad de menú seleccionado: " + cantidades_menu_seleccionados.get(i));
+                            System.out.println("                                                                   ");
+                            total_precio += precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i);
+                            total_menu = precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i);
+                            System.out.println("  total de menu. S/. " + total_menu);
+                        }
+                        System.out.println("  masMENU seleccionados:");
+                        for (int i = 0; i < complementos_seleccionados.size(); i++) {
+                            String complemento = complementos_seleccionados.get(i).split("\\.")[1];
+                            System.out.println("  masMENU/Extras: " + complemento);
+                            total_precio += precios_complementos_seleccionados.get(i);
+                        }
+                        System.out.println("  Total de compra(menu): S/ " + total_precio);
+                        ivg_total = total_precio * igv;
+                        System.out.println("IGV : S/ " + ivg_total);
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println("SU TOTAL DE COMPRA(compra_que hizo) ES: " + (ivg_total + total_precio));
+                        System.out.println("------------------------------------------------------------------------");
+                        System.out.println("PRECIONE ENTER PARA CONTINUAR:");
+                        wali.nextLine();
+                        System.out.println("PARA CONTINUAR CON EL PAGO ESCRIBA---->(1)");
+                        opcion = wali.nextLine();
+                        int opcion_entera = Integer.parseInt(opcion);
+                        switch (opcion_entera) {
+                            case 1:
+                                System.out.println("precione enter para ELEGIR EL METODO DE PAGO:");
+                                wali.nextLine();
+                                metodo_de_pago();
+                                System.out.println("PRECIONE ENTER PARA VER SU FACTURA:");
+                                wali.nextLine();
+                                factura(menu_seleccionados, cantidades_menu_seleccionados, precios_menu_selecionados, promociones_selecionadas, cantidades_promociones_seleccionados, precios_promociones_selecionadas, metodo_entrega, metodo_de_pago_seleccioando);
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                }
+        }
+    }
+
+    public static void iniciar_sesion() {
+        Scanner vizcarra = new Scanner(System.in);
+        String direccion, op;
+        String correo_valido, contraseña_valida, nombre_valido;
+        String registro, contraeña, nombre, respuesta;
+        respuesta = vizcarra.nextLine();
+        System.out.println("PARA COMONEZAR A REALIZAR PEDIDOS DEBE: (registrese/inicie sesion)");
+        System.out.println("1.- REGISTRARSE");
+        System.out.println("2.- INICIAR SESION");
+        op = vizcarra.nextLine();
+        switch (op) {
+            case "1":
+                if (!registrarse) {
+                    System.out.println("REGISTRO:");
+                    System.out.println("Introduzca su nombre:");
+                    nombre = vizcarra.nextLine();
+                    registro_de_nombres.add(nombre);
+                    System.out.println("registre su correo electronico:");
+                    registro = vizcarra.nextLine();
+                    while (!registro.contains("@gmail.com")) {
+                        System.out.println("Correo electrónico inválido, por favor vuelva a intentar :).");
+                        registro = vizcarra.nextLine();
+                    }
+                    registro_de_usuarios.add(registro);
+                    System.out.println("cree su contraeña:");
+                    contraeña = vizcarra.nextLine();
+                    registro_de_contraseñas.add(contraeña);
+                    String[] usuarios = registro_de_usuarios.toArray(new String[0]);
+                    String[] contraseñas = registro_de_contraseñas.toArray(new String[0]);
+                    System.out.println("INICIAR SESIÓN:");
+                    do {
+                        System.out.println("Ingrese su correo electrónico");
+                        correo_valido = vizcarra.nextLine();
+                        System.out.println("Ingrese su contraseña: ");
+                        contraseña_valida = vizcarra.nextLine();
+                        for (int i = 0; i < registro_de_usuarios.size(); i++) {
+                            if (correo_valido.equals(registro_de_usuarios.get(i)) && contraseña_valida.equals(registro_de_contraseñas.get(i))) {
+                                System.out.println("Inicio de sesión, ¡EXITOSO!");
+                                registrarse = true;
+                                inicio_sesion = true;
+                                break;
+                            }
+                        }
+                        if (!inicio_sesion) {
+                            System.out.println("Inicio de sesión, ¡FALLIDO!");
+                            System.out.println("Correo o contraseña incorrecta.");
+                        }
+                    } while (!registrarse);
+                    System.out.println("VAMOS A COMPRAR");
+                    menu_principal();
+                }
+                break;
+            case "2":
+                String[] usuarios = registro_de_usuarios.toArray(new String[0]);
+                String[] contraseñas = registro_de_contraseñas.toArray(new String[0]);
+                System.out.println("INICIAR SESIÓN:");
+                System.out.println("ingrese su correo:");
+                correo_valido = vizcarra.nextLine();
+                System.out.println("ingrese su contraseña:");
+                contraseña_valida = vizcarra.nextLine();
+                for (int i = 0; i < usuarios.length; i++) {
+                    if (correo_valido.equals(usuarios[i]) && contraseña_valida.equals(contraseñas[i])) {
+                        System.out.println("Inicio de sesión, ¡EXITOSO!");
+                        registrarse = true;
+                    }
+                }
+                menu_principal();
+                break;
+
+        }
+
+    }
+
+    static void metodo_de_pago() {
+        Scanner opcion = new Scanner(System.in);
+        int op;
+        System.out.println("SELECIONE POR CUAL METODO DE PAGO, VA A RELIZAR SU PAGO");
+        System.out.println("1:   TARJETA VISA/MASTERCARD");
+        System.out.println("2:   YAPE (SOLO NUMERO)");
+        System.out.println("3:   EFECTIVO");
+        op = opcion.nextInt();
+        switch (op) {
+            case 1:
+                metodopago_tarjeta();
+                break;
+            case 2:
+                metodopago_yape();
+                break;
+            case 3:
+                metodoPagoEfectivo();
+                break;
+        }
+    }
+
+
+    public static boolean tipo_de_tarjeta;
+
+    static void metodopago_tarjeta() {
+        String metodo, fecha, cvv, nombre, confirmar, volver, volverr, menu;
+        boolean valida;
+        Scanner wali = new Scanner(System.in);
+        do {
+            System.out.println("INGRESE EL NOMBRE Y APELLIDO DEL TITULAR DE LA TARJETA");
+            nombre = wali.nextLine();
+            System.out.println("INGRESE SU NUMERO DE TARJETA:  (1234 1234 1234 1234)");
+            metodo = wali.nextLine().trim();
+            if (metodo.length() != 19 || !metodo.matches("[4-5]\\d{3} \\d{4} \\d{4} \\d{4}")) {
+                System.out.println("Por favor, INGRESE SU NUMERO DE TARJETA TAL COMO SE MUESTRA EN SU TARJETA.");
+            } else {
+                if (metodo.startsWith("4")) {
+                    System.out.println("Tarjeta tipo: Visa");
+                    tipo_de_tarjeta = true;
+                } else if (metodo.startsWith("5")) {
+                    System.out.println("Tarjeta tipo: MasterCard");
+                    tipo_de_tarjeta = false;
+                }
+                metodo_de_pago_seleccioando += (tipo_de_tarjeta ? " VISA" : " MASTERCARD");
+            }
+        } while (metodo.length() != 19 || !metodo.matches("[4-5]\\d{3} \\d{4} \\d{4} \\d{4}"));
+        do {
+            System.out.println("INGRESE LA FECHA DE VENCIMIENTO DE SU TARJETA(mes/año) (MM/AAAA):");
+            fecha = wali.nextLine().trim();
+            valida = fecha.matches("\\d{2}/\\d{4}");
+            if (valida) {
+                String[] partes = fecha.split("/");
+                int mes = Integer.parseInt(partes[0]);
+                int año = Integer.parseInt(partes[1]);
+                valida = (año >= 2024 && mes >= 6) && (año <= 2035 && mes <= 12);
+            }
+            if (!valida) {
+                System.out.println("Por favor, SU TARJETA VENCIÓ, VUELVE A INTENTAR O CAMBIE EL METODO DE PAGO.");
+            }
+        } while (!valida);
+        do {
+            System.out.println("INGRESE SU CODIGO (CVV)");
+            cvv = wali.nextLine().trim();
+            if (cvv.length() != 3 || !cvv.matches("\\d{3}")) {
+                System.out.println("Por favor, CODIGO (CVV) INCORRECTO O NO COENCIDE CON LA TERJETA, VUELVE A INTENTAR.");
+            }
+        } while (cvv.length() != 3 || !cvv.matches("\\d{3}"));
+        System.out.println("DESEA CONFIRMAR SU METODO DE PAGO:  (SI/NO)");
+        confirmar = wali.nextLine();
+        if (confirmar.equalsIgnoreCase("SI")) {
+            metodo_de_pago_seleccioando = "TARJETA(CREDITO/DEBITO) ";
+            System.out.println("PAGO FUE REALIZADO CON EXITO");
+            System.out.println("LA TRANSACCION FUE REALIZADA POR EL TITULAR: " + nombre);
+            System.out.println("MONTO DESCONTADO A LA TARJETA: " + metodo + " -- " + fecha + " -- XXX");
+            System.out.println("GRACIAS POR SU COMPRA");
+            System.out.println("DESEA VOLVER AL MENU PRINCIPAL?? (SI/NO)");
+            volver = wali.nextLine();
+            if (volver.equals("si") || volver.equals("SI")) {
+                System.out.println("MENU");
+            }
+        } else if (confirmar.equalsIgnoreCase("NO")) {
+            System.out.println("SU PAGO SE HA CANCELADO");
+            System.out.println("¿DESEA CAMBIAR DE MÉTODO DE PAGO? (SI/NO)");
+            volverr = wali.nextLine();
+            if (volverr.equals("si") || volverr.equals("SI")) {
+                metodo_de_pago();
+            } else {
+                System.out.println("SU COMPRA SE HA CANCELADO");
+                System.out.println("DESEA VOLVER AL MENU PRINCIPAL?? (SI/NO)");
+                menu = wali.nextLine();
+                if (menu.equals("si") || menu.equals("SI")) {
+                    System.out.println("MENU");
+                } else {
+                    System.out.println("GRACIAS POR VISITAR A STARBUCKS");
+                }
+            }
+        }
+    }
+
+    static void metodopago_yape() {
+        String yape, confirmar, volver, volverr, menu;
+        Scanner yapee = new Scanner(System.in);
+        do {
+            System.out.println("Ingrese su número de teléfono asociado a Yape para efectuar su pedido");
+            yape = yapee.nextLine().trim();
+            if (yape.length() != 9 || !yape.matches("[9]\\d{8}")) {
+                System.out.println("Número de Yape inválido. Por favor, ingrese un número de 9 dígitos que comience con 9");
+            }
+        } while (yape.length() != 9 || !yape.matches("[9]\\d{8}"));
+        System.out.println("DESEA CONFIRMAR SU METODO DE PAGO:  (SI/NO)");
+        confirmar = yapee.nextLine();
+        if (confirmar.equals("si") || confirmar.equals("SI")) {
+            metodo_de_pago_seleccioando = "YAPE";
+            System.out.println("PAGO FUE REALIZADO CON EXITO");
+            System.out.println("Pago realizado con éxito a través de Yape, con el numero de:" + yape);
+            System.out.println("GRACIAS POR SU COMPRA");
+            System.out.println("DESEA VOLVER AL MENU PRINCIPAL?? (SI/NO)");
+            volver = yapee.nextLine();
+            if (volver.equalsIgnoreCase("SI")) {
+                System.out.println("MENU");
+            }
+        } else if (confirmar.equalsIgnoreCase("NO")) {
+            System.out.println("SU PAGO SE HA CANCELADO");
+            System.out.println("¿DESEA CAMBIAR DE MÉTODO DE PAGO? (SI/NO)");
+            volverr = yapee.nextLine();
+            if (volverr.equals("si") || volverr.equals("SI")) {
+                metodo_de_pago();
+            } else {
+                System.out.println("SU COMPRA SE HA CANCELADO");
+                System.out.println("DESEA VOLVER AL MENU PRINCIPAL?? (SI/NO)");
+                menu = yapee.nextLine();
+                if (menu.equals("si") || menu.equals("SI")) {
+                    System.out.println("MENU");
+                } else {
+                    System.out.println("GRACIAS POR VISITAR A STARBUCKS");
+                }
+            }
+        }
+    }
+    static void metodoPagoEfectivo() {
+        String confirmar, volver, menu;
+        double monto;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingrese el monto a pagar en efectivo LO QUE INDICA EL TOTAL DE COMPRA QUE HIZO");
+        monto = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.println("DESEA CONFIRMAR SU METODO DE PAGO:  (SI/NO)");
+        confirmar = scanner.nextLine();
+
+        if (confirmar.equalsIgnoreCase("si")) {
+            metodo_de_pago_seleccioando = "EFECTIVO";
+            System.out.println("PAGO FUE REALIZADO CON EXITO");
+            System.out.println("Pago realizado con éxito en efectivo, con el monto de: " + monto);
+            System.out.println("GRACIAS POR SU COMPRA");
+            System.out.println("DESEA VOLVER AL MENU PRINCIPAL?? (SI/NO)");
+            volver = scanner.nextLine();
+            if (volver.equalsIgnoreCase("si")) {
+                System.out.println("MENU");
+            }
+        } else if (confirmar.equalsIgnoreCase("no")) {
+            System.out.println("SU PAGO SE HA CANCELADO");
+            System.out.println("¿DESEA CAMBIAR DE MÉTODO DE PAGO? (SI/NO)");
+            volver = scanner.nextLine();
+            if (volver.equalsIgnoreCase("si")) {
+                metodo_de_pago();
+            } else {
+                System.out.println("SU COMPRA SE HA CANCELADO");
+                System.out.println("DESEA VOLVER AL MENU PRINCIPAL?? (SI/NO)");
+                menu = scanner.nextLine();
+                if (menu.equalsIgnoreCase("si")) {
+                    System.out.println("MENU");
+                } else {
+                    System.out.println("GRACIAS POR VISITAR A STARBUCKS");
+                }
+            }
+        }
+    }
+    public static String[] usuarios = registro_de_usuarios.toArray(new String[0]);
+
+    public static void pagina_principal() {
+        Scanner vizcarra = new Scanner(System.in);
+        String direccion, op;
+        String correo_valido, contraseña_valida;
+        String registro, contraeña, respuesta;
+
+        String opcion;
+        if (!registrarse) {
+            System.out.println("PARA EMPEZAR PARA LA COMPRA ESCRIBA--->(1)                                                                                      EMPIECE A ORDENAR (REGISTRARSE/INICIE SESION)                │");
+            opcion = vizcarra.nextLine();
+            switch (opcion) {
+                case "1":
+                    System.out.println("MENUS: ");
+                    for (String MENU : menuprincipal) {
+                        System.out.println(MENU);
+                    }
+                    iniciar_sesion();
+                    break;
+
+            }
+        } else {
+            String[] usuarios = registro_de_usuarios.toArray(new String[0]);
+
+            System.out.println("escriba (1)");
+            System.out.println(" 1.- MENU --------------------->CUENTA:" + "(" + usuarios[0] + ")" + "     │");
+            opcion = vizcarra.nextLine();
+            switch (opcion) {
+                case "1":
+                    if (registrarse) {
+                        String[] contraseñas = registro_de_contraseñas.toArray(new String[0]);
+                        System.out.println("INFORMACIÓN DE LA CUENTA:");
+                        System.out.println("Correo electrónico: " + usuarios[0]);
+                        System.out.println("1.- volver a la pagina principal");
+                        System.out.println("2.-¿Desea cerrar sesión? (si/no)");
+                        op = vizcarra.nextLine();
+                        switch (op) {
+                            case "1":
+                                pagina_principal();
+                                break;
+                            case "2":
+                                System.out.println("su sesion se ha cerrado!");
+                                System.out.println("para poder seguir ordenando, vuleva la menu principal");
+                                System.out.println("deseaa: ...");
+                                System.out.println("1.- volver al menu principal");
+                                System.out.println("2.- salir de la pagina");
+                                registrarse = false;
+                                op = vizcarra.nextLine();
+                                switch (op) {
+                                    case "1":
+                                        pagina_principal();
+                                        break;
+                                    case "2":
+                                        System.out.println("GRACIAS POR VISITAR A STARBUCKS");
+                                        System.out.println("VUELVA PRONTO");
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                    }
+
+            }
+        }
+    }
+
+    public static void factura(List<String> menu_seleccionados, List<Integer> cantidades_menu_seleccionados, List<Double> precios_menu_selecionados, List<String> promociones_selecionadas, List<Integer> cantidades_promociones_seleccionados, List<Double> precios_promociones_selecionadas, boolean metodo_entrega, String metodo_de_pago_seleccioando) {
+        Scanner wali = new Scanner(System.in);
+        String volver;
+        double subtotal = 0.0;
+        for (int i = 0; i < menu_seleccionados.size(); i++) {
+            subtotal += precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i);
+        }
+        for (int i = 0; i < promociones_selecionadas.size(); i++) {
+            subtotal += precios_promociones_selecionadas.get(i) * cantidades_promociones_seleccionados.get(i);
+        }
+        for (int i = 0; i < masmenus_seleccionados.size(); i++) {
+            subtotal += precios_masMENUS_seleccionados.get(i);
+        }
+        double igv = subtotal * 0.18;
+        double delivery = metodo_entrega ? 10 : 0;
+        double total_factura = subtotal + igv + delivery;
+        System.out.println("                                                              ");
+        System.out.println("                      LASINO S.A -RUC N° 20388829452       ");
+        System.out.println("                          Real Plaza, Juliaca 21104                       ");
+        System.out.println("   ----------------BOLETA DE VENTA ELECTRONICA--------------------                              ");
+        System.out.println("                                                              ");
+        System.out.println("   FECHA DE EMISION:             :" + LocalDate.now());
+        System.out.println("   HORA                          :" + LocalTime.now());
+        System.out.println("   NOMBRE:                       " + registro_de_nombres);
+        System.out.println("                                                              ");
+        for (int i = 0; i < menu_seleccionados.size(); i++) {
+            System.out.println("   Menu: " + menu_seleccionados.get(i));
+            System.out.println("   Cantidad de producto: " + cantidades_menu_seleccionados.get(i));
+            System.out.println("   Precio total de menu: S/" + (precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i)));
+
+        }
+        for (int i = 0; i < masmenus_seleccionados.size(); i++) {
+            System.out.println("  masMENU: " + masmenus_seleccionados.get(i));
+            System.out.println("   Precio del complemento: S/" + precios_masMENUS_seleccionados.get(i));
+        }
+        System.out.println("                                                              ");
+        System.out.println("   Sub-total:                                     " + subtotal + " soles");
+        System.out.println("   IGV (18%):                                     " + igv + " soles");
+        System.out.println("   Total:                                         " + total_factura + " soles");
+        System.out.println("   Medio de pago:                                 " + metodo_de_pago_seleccioando + (tipo_de_tarjeta ? "VISA" : "MASTERCARD"));
+        System.out.println("                                                                                                                      ");
+        System.out.println("desea  exportar su factura?");
+        String exportar = wali.nextLine();
+        if (exportar.equalsIgnoreCase("si"))
+            exportar_factura(menu_seleccionados, cantidades_menu_seleccionados, precios_menu_selecionados, promociones_selecionadas, cantidades_promociones_seleccionados, precios_promociones_selecionadas, metodo_entrega, metodo_de_pago_seleccioando);
+        System.out.println("DESEA VOLVER AL MENU PRINCIPAL?? (SI/NO)");
+        volver = wali.nextLine();
+        if (volver.equals("si") || volver.equals("SI")) {
+            pagina_principal();
+        } else {
+            System.out.println("Gracias por ser cliente de starbucks");
+            System.out.println("Esperamos que disfrute su compra :) ");
+        }
+    }
+
+    public static String exportar_factura(List<String> menu_seleccionados, List<Integer> cantidades_menu_seleccionados, List<Double> precios_menu_selecionados, List<String> promociones_selecionadas, List<Integer> cantidades_promociones_seleccionados, List<Double> precios_promociones_selecionadas, boolean metodo_entrega, String metodo_de_pago_seleccioando) {
+        double subtotal = 0.0;
+        for (int i = 0; i < menu_seleccionados.size(); i++) {
+            subtotal += precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i);
+        }
+        for (int i = 0; i < promociones_selecionadas.size(); i++) {
+            subtotal += precios_promociones_selecionadas.get(i) * cantidades_promociones_seleccionados.get(i);
+        }
+        for (int i = 0; i < masmenus_seleccionados.size(); i++) {
+            subtotal += precios_masMENUS_seleccionados.get(i);
+        }
+        double igv = subtotal * 0.18;
+        double total_factura = subtotal + igv ;
+        try {
+            File archivo = new File("D:\\boleta.txt");
+            FileWriter escritor = new FileWriter(archivo);
+            escritor.write("------------------------------------------------------------------------------------\n");
+            escritor.write("                                                                                    \n");
+            escritor.write("                      LASINO S.A -RUC N° 20388829452       \n");
+
+            escritor.write("                        Real Plaza, Juliaca 21104                                      \n");
+
+            escritor.write("----------------------------BOLETA DE VENTA ELECTRONICA----------------------------------\n");
+            escritor.write("                                                              \n");
+            escritor.write("                                                              \n");
+            escritor.write("   FECHA DE EMISION            :" + LocalDate.now());
+            escritor.write("   HORA                        :" + LocalTime.now());
+            escritor.write("   NOMBRE                      :" + registro_de_nombres);
+            escritor.write("                                                              \n");
+            escritor.write("                                                              \n");
+            for (int i = 0; i < menu_seleccionados.size(); i++) {
+                String selecionnn = menu_seleccionados.get(i).split("\\.")[1];
+                escritor.write("   Menu: "                          + selecionnn + "\n");
+                escritor.write("   Cantidad de producto:          " + cantidades_menu_seleccionados.get(i) + "\n");
+                escritor.write("   Precio total de menu: S/"        + (precios_menu_selecionados.get(i) * cantidades_menu_seleccionados.get(i)) + "\n");
+            }
+            for (int i = 0; i < masmenus_seleccionados.size(); i++) {
+                String selecion = masmenus_seleccionados.get(i).split("\\.")[1];
+                escritor.write("   masMENU: " + selecion + "\n");
+                escritor.write("   Precio del complemento: S/" + precios_masMENUS_seleccionados.get(i) + "\n");
+            }
+            escritor.write("                                                              \n");
+            escritor.write("   Sub-total:    " + "               " + subtotal + " soles\n");
+            escritor.write("   IGV (18%):    " + "               " + igv + " soles\n");
+            escritor.write("                                                              \n");
+            escritor.write("   Total:        " + "               " + total_factura + " soles\n");
+            escritor.write("                                                                \n");
+            escritor.write("   Medio de pago:" + "               " + metodo_de_pago_seleccioando + "\n");
+            escritor.write("                                                              \n");
+            escritor.close();
+            System.out.println("La factura ha sido exportada exitosamente!");
+        } catch (IOException d) {
+            System.out.println("Ocurrió un error al exportar la factura.");
+            d.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        UNIDAD_3_STARBUCKS SHEYLA = new UNIDAD_3_STARBUCKS();
+        System.out.println("____________________________________________");
+        System.out.println("-------BIENVENIDOS A STARBUCKS-------");
+        pagina_principal();
+    }
+
+}
